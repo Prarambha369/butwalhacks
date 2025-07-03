@@ -9,7 +9,6 @@ import BinNav from "../components/bin/nav";
 import Footer from "../components/bin/Footer";
 import "../styles/global.css";
 import { Analytics } from "@vercel/analytics/next";
-import {BalancerProvider} from 'react-wrap-balancer';
 
 const App = ({Component, pageProps}) => (
     <ThemeProvider theme={theme}>
@@ -19,9 +18,7 @@ const App = ({Component, pageProps}) => (
                 content="7zE7h5foPaxIcnv5Frq6BkcUb9-3UzVc8q3P_cexf9I"
             />
         </Meta>
-        <BalancerProvider>
-            <Component {...pageProps} />
-        </BalancerProvider>
+        <Component {...pageProps} />
         <Analytics/>
     </ThemeProvider>
 )

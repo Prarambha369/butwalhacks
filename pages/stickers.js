@@ -2,9 +2,7 @@ import {Card, Box, Flex, Grid, Heading, Image, Text} from 'theme-ui'
 import Meta from '@hackclub/meta'
 import Head from 'next/head'
 import Nav from '../components/bin/nav'
-// import BGImg from '../components/background-image'
 import Footer from '../components/bin/Footer'
-// import ForceTheme from '../components/force-theme'
 
 import fs from 'fs'
 import path from 'path'
@@ -21,7 +19,6 @@ function customStartCase(st) {
 
 const StickersPage = ({stickers = []}) => [
     <Box as="main" key="main" sx={{textAlign: 'center'}}>
-        // <ForceTheme theme="dark"/>
         <Nav dark/>
         <Meta
             as={Head}
