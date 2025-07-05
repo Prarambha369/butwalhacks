@@ -29,13 +29,13 @@ export default function Form() {
       >
         <Box
           as="iframe"
-          data-tally-src="https://tally.so/r/mO9a6K?transparentBackground=1"
+          data-tally-src="https://tally.so/r/mO9a6K?transparentBackground=0"
           width="100%"
           height="100%"
           frameBorder="0"
           marginHeight="0"
           marginWidth="0"
-          title="Want to be Part of HackClub Butwal"
+          title="Membership Form : Part I"
           sx={{
             border: 0,
             display: 'block',
