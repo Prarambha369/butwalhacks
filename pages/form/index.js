@@ -6,7 +6,10 @@ export default function Form() {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <title>Want to be Part of HackClub Butwal</title>
         <script async src="https://tally.so/widgets/embed.js"></script>
       </Head>
@@ -24,13 +27,14 @@ export default function Form() {
           padding: 0,
         }}
       >
-        <iframe 
-          data-tally-src="https://tally.so/r/mO9a6K?transparentBackground=1" 
-          width="100%" 
-          height="100%" 
-          frameBorder="0" 
-          marginHeight="0" 
-          marginWidth="0" 
+        <Box
+          as="iframe"
+          data-tally-src="https://tally.so/r/mO9a6K?transparentBackground=1"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          marginHeight="0"
+          marginWidth="0"
           title="Want to be Part of HackClub Butwal"
           sx={{
             border: 0,

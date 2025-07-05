@@ -1,16 +1,13 @@
-import { Box, Button, Container, Heading, Text, Flex } from 'theme-ui';
-import Head from 'next/head';
-import Image from 'next/image';
-import DecorativeShapes from '../components/DecorativeShapes';
-import Link from 'next/link';
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Box, Button, Heading, Text, Flex, useColorMode } from 'theme-ui'
 
-import Carousel from "../components/index/Carousel";
-import CreateCard from "../components/index/cards/CreateCard";
-import carouselData from "../lib/carousel.json";
-import SprigConsole from "../components/index/cards/sprig-console";
-import Workshops from "../components/index/cards/workshops";
+import DecorativeShapes from '../components/DecorativeShapes'
 
 export default function Home() {
+  const [colorMode] = useColorMode()
+
   return (
     <div className="no-drag-select">
       <Head>
@@ -19,48 +16,39 @@ export default function Home() {
           name="description"
           content="HackClub Butwal: Local Club in the corner of Butwal."
         />
+        {/* Favicon */}
+        <link
+          rel="icon"
+          href="/assets/favicon/favicon.ico"
+          type="image/x-icon"
+        />
       </Head>
 
-      <Box
-        sx={{
-          minHeight: '100vh',
-          bg: 'linear-gradient(135deg, #181B2A 0%, #232946 100%)',
-          color: 'white',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          px: 3,
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
+     <Box
+  sx={{
+    minHeight: '100vh',
+    bg: 'background', // uses the theme-defined background
+    color: 'text',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    px: 3,
+    position: 'relative',
+    overflow: 'hidden',
+  }}
+>
+
         <DecorativeShapes />
 
-        <Box
-          sx={{
-            width: 160,
-            maxWidth: '60vw',
-            mb: 4,
-            borderRadius: 32,
-            boxShadow: '0 8px 32px rgba(30,80,160,0.15)',
-            position: 'relative',
-            zIndex: 1,
-            overflow: 'hidden',
-            mx: 'auto',
-            transition: 'transform 0.3s ease-in-out',
-            '&:hover': {
-              transform: 'scale(1.05)',
-            },
-          }}
-        >
+        {/* Logo at top */}
+        <Box sx={{ mb: 4, zIndex: 1 }}>
           <Image
-            src="/assets/logo/red_logo/hackclubbutwal.svg"
+            src="/bin/logo/rlogo.svg"
             alt="HackClub Butwal Logo"
-            width={160}
-            height={160}
-            style={{ width: '100%', height: 'auto' }}
+            width={150}
+            height={150}
             priority
           />
         </Box>
@@ -70,14 +58,8 @@ export default function Home() {
           sx={{
             fontSize: [5, 6],
             mb: 3,
-            letterSpacing: '-0.03em',
-            fontWeight: 'bold',
-            color: 'white',
-            textShadow: '0 2px 16px #1E50A0',
-            textAlign: 'center',
-            lineHeight: '1.2',
-            position: 'relative',
             zIndex: 1,
+            color: 'white',
           }}
         >
           HackClub Butwal
@@ -86,15 +68,8 @@ export default function Home() {
         <Text
           sx={{
             fontSize: [2, 3],
-            mb: 4,
-            opacity: 0.95,
-            maxWidth: 500,
-            mx: 'auto',
-            color: 'white',
-            textAlign: 'center',
-            lineHeight: '1.5',
-            position: 'relative',
             zIndex: 1,
+            color: 'white',
           }}
         >
           We’re building something amazing for young coders and techies in Butwal.
@@ -105,19 +80,16 @@ export default function Home() {
         <Flex sx={{ justifyContent: 'center', mb: 4, position: 'relative', zIndex: 1 }}>
           <Link href="/form" passHref legacyBehavior>
             <Button
-              as="a"
               sx={{
-                bg: 'accent',
-                color: 'white',
-                fontWeight: 'bold',
                 px: 4,
-                py: 3,
-                borderRadius: 'circle',
-                fontSize: [2, 3],
-                boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+                py: 2,
+                bg: '#ec3750',
+                color: colorMode === 'dark' ? 'white' : 'black',
+                borderRadius: 8,
+                boxShadow: '0 4px 12px rgba(236, 55, 80, 0.4)',
                 transition: 'all 0.2s',
                 letterSpacing: '0.01em',
-                '&:hover': { bg: 'secondary', transform: 'scale(1.05)' },
+                '&:hover': { bg: '#d53145', transform: 'scale(1.05)' },
               }}
             >
               Join The Club
@@ -125,16 +97,18 @@ export default function Home() {
           </Link>
         </Flex>
 
-        <Text sx={{ fontSize: 1, opacity: 0.7, position: 'relative', zIndex: 1 }}>
+        <Text
+          sx={{
+            fontSize: 1,
+            opacity: 0.7,
+            position: 'relative',
+            zIndex: 1,
+            color: 'white',
+          }}
+        >
           © {new Date().getFullYear()} HackClub Butwal
         </Text>
       </Box>
-
-      <Container sx={{ py: 5 }}>
-        <Carousel cards={carouselData} />
-        <SprigConsole stars={0} consoleCount={0} />
-        <Workshops />
-      </Container>
     </div>
-  );
+  )
 }
