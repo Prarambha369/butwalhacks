@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next build && next export",
+    "serve": "serve out -s -p 3000"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -22,8 +24,8 @@
     "next": "^15.3.3",
     "prettier": "^3.6.2",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-page-visibility": "^7.0.0",
     "react-relative-time": "^0.0.9",
     "react-ticker": "^1.3.2",
@@ -31,5 +33,8 @@
     "react-wrap-balancer": "^1.1.1",
     "theme-ui": "^0.17.2",
     "vanilla-tilt": "^1.8.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
   }
 }

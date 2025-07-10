@@ -1,10 +1,28 @@
-import React from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { Box, Container, Heading, Text, Button, Flex } from "theme-ui";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 
 export default function Custom404() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const path = router.asPath;
+
+    if (path.includes("/form/form.html") || path === "/form.html") {
+      router.replace("/form");
+      return;
+    }
+
+    if (path.endsWith(".html")) {
+      const newPath = path.replace(".html", "");
+      router.replace(newPath);
+      return;
+    }
+  }, [router]);
+
   return (
     <>
       <Head>
@@ -80,14 +98,12 @@ export default function Custom404() {
               <Link href="/workshops" sx={{ color: "primary" }}>
                 Workshops
               </Link>
-              ,
+              ,{" "}
               <Link href="/community" sx={{ color: "primary" }}>
-                {" "}
                 Community
               </Link>
-              , or
+              , or{" "}
               <Link href="/gallery" sx={{ color: "primary" }}>
-                {" "}
                 Gallery
               </Link>{" "}
               pages. Or{" "}
