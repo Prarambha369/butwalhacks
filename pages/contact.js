@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import Head from 'next/head'
 import {Container, Box, Heading, Text, Card, Grid, Link, Flex, Button} from 'theme-ui'
 import {useRouter} from 'next/router'
-import {Instagram, GitHub, Mail, ExternalLink, MapPin, Phone} from '@hackclub/icons'
+import {Instagram, GitHub, Mail, ExternalLink} from '@hackclub/icons'
 import BinNav from '../components/bin/nav'
 
 export default function Contact() {
