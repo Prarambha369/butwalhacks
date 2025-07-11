@@ -1,0 +1,6 @@
+{
+  "pageProps": {
+    "css": "@font-face {\n  font-family: 'Phantom Sans';\n  src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff')\n      format('woff'),\n    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Regular.woff2')\n      format('woff2');\n  font-weight: normal;\n  font-style: normal;\n  font-display: swap;\n}\n@font-face {\n  font-family: 'Phantom Sans';\n  src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Italic.woff')\n      format('woff'),\n    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Italic.woff2')\n      format('woff2');\n  font-weight: normal;\n  font-style: italic;\n  font-display: swap;\n}\n@font-face {\n  font-family: 'Phantom Sans';\n  src: url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff')\n      format('woff'),\n    url('https://assets.hackclub.com/fonts/Phantom_Sans_0.7/Bold.woff2')\n      format('woff2');\n  font-weight: bold;\n  font-style: normal;\n  font-display: swap;\n}\n"
+  },
+  "__N_SSG": true
+}
