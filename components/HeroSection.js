@@ -43,14 +43,23 @@ function LogoCard() {
         },
       }}
     >
-      <Image
-        src="/assets/logo/rlogo.svg"
-        alt="HackClub Butwal Logo"
-        width={200}
-        height={200}
-        style={{ width: "100%", height: "auto" }}
-        priority
-      />
+        <Box
+            sx={{
+                width: "100%",
+                height: "200px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bg: "primary",
+                color: "white",
+                fontSize: [4, 5],
+                fontWeight: "bold",
+                textAlign: "center",
+                borderRadius: "16px",
+            }}
+        >
+            HC Butwal
+        </Box>
     </Box>
   );
 }

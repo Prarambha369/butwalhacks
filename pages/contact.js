@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import Head from 'next/head'
 import {Container, Box, Heading, Text, Card, Grid, Link, Flex, Button} from 'theme-ui'
 import {useRouter} from 'next/router'
-import {Instagram, GitHub, Mail, ExternalLink} from '@hackclub/icons'
+import Icon from '@hackclub/icons'
 import BinNav from '../components/bin/nav'
 
 export default function Contact() {
@@ -144,7 +144,7 @@ export default function Contact() {
                         <Grid gap={3} sx={{mb: 4}}>
                             <Flex sx={{alignItems: 'center'}}>
                                 <Box sx={{mr: 3, color: 'primary'}}>
-                                    <Mail size={24}/>
+                                    <Icon glyph="mail" size={24}/>
                                 </Box>
                                 <Box>
                                     <Text sx={{fontWeight: 'bold', mb: 1}}>Email</Text>
@@ -164,7 +164,7 @@ export default function Contact() {
 
                             <Flex sx={{alignItems: 'center'}}>
                                 <Box sx={{mr: 3, color: 'primary'}}>
-                                    <Instagram size={24}/>
+                                    <Icon glyph="instagram" size={24}/>
                                 </Box>
                                 <Box>
                                     <Text sx={{fontWeight: 'bold', mb: 1}}>Instagram</Text>
@@ -186,7 +186,7 @@ export default function Contact() {
 
                             <Flex sx={{alignItems: 'center'}}>
                                 <Box sx={{mr: 3, color: 'primary'}}>
-                                    <GitHub size={24}/>
+                                    <Icon glyph="github" size={24}/>
                                 </Box>
                                 <Box>
                                     <Text sx={{fontWeight: 'bold', mb: 1}}>GitHub</Text>
@@ -208,7 +208,7 @@ export default function Contact() {
 
                             <Flex sx={{alignItems: 'center'}}>
                                 <Box sx={{mr: 3, color: 'primary'}}>
-                                    <MapPin size={24}/>
+                                    <Icon glyph="location" size={24}/>
                                 </Box>
                                 <Box>
                                     <Text sx={{fontWeight: 'bold', mb: 1}}>Location</Text>
@@ -239,7 +239,7 @@ export default function Contact() {
                                     mb: 2
                                 }}
                             >
-                                Join Hack Club Slack <ExternalLink size={20} style={{marginLeft: '8px'}}/>
+                                Join Hack Club Slack <Icon glyph="external-link" size={20} style={{marginLeft: '8px'}}/>
                             </Button>
 
                             <Button
@@ -255,7 +255,7 @@ export default function Contact() {
                                     width: '100%'
                                 }}
                             >
-                                Join Our Discord <ExternalLink size={20} style={{marginLeft: '8px'}}/>
+                                Join Our Discord <Icon glyph="external-link" size={20} style={{marginLeft: '8px'}}/>
                             </Button>
                         </Box>
 

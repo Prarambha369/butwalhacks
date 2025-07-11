@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Heading, Text, Flex, Box, Link } from "theme-ui";
 import Image from "next/image";
-import { GitHub, Twitter, LinkedIn } from "@hackclub/icons";
+import Icon from "@hackclub/icons";
 
 export default function MemberCard({ member }) {
   const { name, role, bio, avatar, socials = {} } = member;
@@ -58,7 +58,7 @@ export default function MemberCard({ member }) {
               }}
               aria-label={`${name}'s GitHub profile`}
             >
-              <GitHub size={24} />
+                <Icon glyph="github" size={24}/>
             </Link>
           )}
 
@@ -74,7 +74,7 @@ export default function MemberCard({ member }) {
               }}
               aria-label={`${name}'s Twitter profile`}
             >
-              <Twitter size={24} />
+                <Icon glyph="twitter" size={24}/>
             </Link>
           )}
 
@@ -90,7 +90,7 @@ export default function MemberCard({ member }) {
               }}
               aria-label={`${name}'s LinkedIn profile`}
             >
-              <LinkedIn size={24} />
+                <Icon glyph="linkedin" size={24}/>
             </Link>
           )}
         </Flex>

@@ -2,11 +2,32 @@ import {useState} from 'react'
 import Head from 'next/head'
 import {Container, Box, Heading, Text, Grid, Flex, Button, Spinner, Badge} from 'theme-ui'
 import EventCard from '../components/EventCard'
-import {useEvents} from '../lib/airtable'
 import BinNav from '../components/bin/nav'
 
+// Demo static data for events
+const demoEvents = [
+    {
+        title: 'Intro to JavaScript',
+        date: '2025-08-01',
+        tags: ['Beginner', 'JavaScript'],
+        description: 'A fun intro to JS.',
+        location: 'Butwal',
+        link: '#'
+    },
+    {
+        title: 'Hackathon',
+        date: '2025-09-10',
+        tags: ['Hackathon'],
+        description: '24-hour coding event.',
+        location: 'Butwal',
+        link: '#'
+    }
+]
+
 export default function Workshops() {
-    const {events, isLoading, error} = useEvents()
+    const events = demoEvents
+    const isLoading = false
+    const error = null
     const [filter, setFilter] = useState('all')
 
     // Get unique tags from all events

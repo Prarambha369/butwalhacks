@@ -2,11 +2,30 @@ import React from 'react'
 import Head from 'next/head'
 import {Container, Box, Heading, Text, Grid, Flex, Button, Spinner} from 'theme-ui'
 import MemberCard from '../components/MemberCard'
-import {useTeamMembers} from '../lib/airtable'
 import BinNav from '../components/bin/nav'
 
+// Demo static data for team members
+const demoMembers = [
+    {
+        name: 'Alex Sharma',
+        role: 'Lead Organizer',
+        bio: 'Passionate about empowering youth through code.',
+        avatar: '/assets/logo/red_logo/hackclubbutwal.svg',
+        socials: {github: 'https://github.com/alex', twitter: '', linkedin: ''}
+    },
+    {
+        name: 'Priya Singh',
+        role: 'Community Manager',
+        bio: 'Building bridges in the tech community.',
+        avatar: '/assets/logo/red_logo/Group_334.svg',
+        socials: {github: '', twitter: '', linkedin: 'https://linkedin.com/in/priya'}
+    }
+]
+
 export default function Community() {
-    const {members, isLoading, error} = useTeamMembers()
+    const members = demoMembers
+    const isLoading = false
+    const error = null
 
     return (
         <>
@@ -114,7 +133,7 @@ export default function Community() {
                 ) : (
                     <Grid columns={[1, null, 2, 3]} gap={4} sx={{mb: 6}}>
                         {members.map(member => (
-                            <MemberCard key={member.id} member={member}/>
+                            <MemberCard key={member.name} member={member}/>
                         ))}
                     </Grid>
                 )}

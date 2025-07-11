@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Heading, Text, Box, Link, Flex } from "theme-ui";
 import Image from "next/image";
-import { ExternalLink } from "@hackclub/icons";
+import Icon from "@hackclub/icons";
 
 function getTierStyle(tier) {
   // Define tier-specific styles
@@ -100,7 +100,7 @@ export default function SponsorCard({ sponsor }) {
             },
           }}
         >
-          Visit Website <ExternalLink size={16} style={{ marginLeft: "4px" }} />
+            Visit Website <Icon glyph="external-link" size={16} style={{marginLeft: "4px"}}/>
         </Link>
       )}
     </Card>

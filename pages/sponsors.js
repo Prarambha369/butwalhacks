@@ -2,12 +2,29 @@ import React from 'react'
 import Head from 'next/head'
 import {Container, Box, Heading, Text, Grid, Flex, Button, Spinner} from 'theme-ui'
 import SponsorCard from '../components/SponsorCard'
-import {useSponsors, groupSponsorsByTier} from '../lib/airtable'
 import BinNav from '../components/bin/nav'
 
+// Demo static data for sponsors
+const demoSponsors = [
+    {name: 'TechCorp', tier: 'Gold', url: 'https://techcorp.com', logo: '/assets/logo/red_logo/Group_325.svg'},
+    {name: 'CodeBase', tier: 'Silver', url: 'https://codebase.com', logo: '/assets/logo/red_logo/Group_334.svg'},
+    {name: 'InnoHub', tier: 'Bronze', url: 'https://innohub.com', logo: '/assets/logo/red_logo/Group_327.svg'}
+]
+
+function groupSponsorsByTier(sponsors) {
+    const tiers = ['Platinum', 'Gold', 'Silver', 'Bronze']
+    const grouped = {}
+    tiers.forEach(tier => {
+        grouped[tier] = sponsors.filter(s => s.tier === tier)
+    })
+    return grouped
+}
+
 export default function Sponsors() {
-    const {sponsors, isLoading, error} = useSponsors()
+    const sponsors = demoSponsors
     const sponsorsByTier = groupSponsorsByTier(sponsors)
+    const isLoading = false
+    const error = null
 
     // Define tier-specific styles for section headers
     const tierHeaderStyles = {
@@ -100,7 +117,7 @@ export default function Sponsors() {
                     </Box>
                 ) : (
                     <>
-                        {sponsorsByTier.map(({tier, sponsors}) => (
+                        {Object.keys(sponsorsByTier).map(tier => (
                             <Box key={tier} sx={{mb: 6}}>
                                 <Box
                                     sx={{
@@ -142,13 +159,14 @@ export default function Sponsors() {
                                         position: 'relative',
                                         zIndex: 1
                                     }}>
-                                        {sponsors.length} sponsor{sponsors.length !== 1 ? 's' : ''} in this tier
+                                        {sponsorsByTier[tier].length} sponsor{sponsorsByTier[tier].length !== 1 ? 's' : ''} in
+                                        this tier
                                     </Text>
                                 </Box>
 
                                 <Grid columns={[1, null, 2]} gap={4}>
-                                    {sponsors.map(sponsor => (
-                                        <SponsorCard key={sponsor.id} sponsor={sponsor}/>
+                                    {sponsorsByTier[tier].map(sponsor => (
+                                        <SponsorCard key={sponsor.name} sponsor={sponsor}/>
                                     ))}
                                 </Grid>
                             </Box>
