@@ -1,21 +1,25 @@
 import React from "react";
 import { Card, Heading, Text, Flex, Box, Badge, Button } from "theme-ui";
 import Image from "next/image";
-import { formatDate } from "../lib/airtable";
-import { Calendar, MapPin } from "@hackclub/icons";
+import Icon from "@hackclub/icons";
 
 // Helper function for rendering date and location
+function formatDate(dateStr) {
+    const d = new Date(dateStr)
+    return d.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'})
+}
+
 function renderDateAndLocation(date, location) {
   return (
     <>
       <Flex sx={{ mb: 2, alignItems: "center", color: "muted" }}>
-        <Calendar size={16} style={{ marginRight: "8px" }} />
+          <Icon glyph="calendar" size={16} style={{marginRight: "8px"}}/>
         <Text sx={{ fontSize: 1 }}>{formatDate(date)}</Text>
       </Flex>
 
       {location && (
         <Flex sx={{ mb: 2, alignItems: "center", color: "muted" }}>
-          <MapPin size={16} style={{ marginRight: "8px" }} />
+            <Icon glyph="location" size={16} style={{marginRight: "8px"}}/>
           <Text sx={{ fontSize: 1 }}>{location}</Text>
         </Flex>
       )}
@@ -42,7 +46,7 @@ export default function EventCard({ event }) {
     >
       <Box sx={{ position: "relative", height: 200 }}>
         <Image
-          src={image || "/assets/logo/red_logo/rlogo.png"}
+          src={image || "/images/logo/red_logo/rlogo.svg"}
           alt={title}
           fill
           style={{ objectFit: "cover" }}

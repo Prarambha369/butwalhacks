@@ -9,60 +9,55 @@ const now = (start, end) =>
 const Event = ({ slug, title, leader, avatar, start, end }) => (
   <Link
     href={`https://events.hackclub.com/${slug}`}
-    as={`https://events.hackclub.com/${slug}`}
-    passHref
     target="_blank"
     rel="noopener"
+    style={{
+      position: "relative",
+      textDecoration: "none",
+      background: "var(--theme-ui-colors-elevated, #fff)",
+      color: "var(--theme-ui-colors-text, #000)",
+      padding: "1rem",
+      display: "block"
+    }}
   >
     <Box
-      as="a"
       sx={{
-        position: "relative",
-        textDecoration: "none",
-        bg: "elevated",
-        color: "text",
-        p: [3, 3],
+        bg: past(end) ? "sunken" : "primary",
+        color: past(end) ? "text" : "white",
+        lineHeight: ["subheading", "body"],
+        m: -3,
+        py: 2,
+        px: 3,
+        mb: 3,
+        strong: { display: ["block", "inline"] },
       }}
     >
-      <Box
-        sx={{
-          bg: past(end) ? "sunken" : "primary",
-          color: past(end) ? "text" : "white",
-          lineHeight: ["subheading", "body"],
-          m: -3,
-          py: 2,
-          px: 3,
-          mb: 3,
-          strong: { display: ["block", "inline"] },
-        }}
-      >
-        <Text>
-          <strong>{tt("{MM} {Do}").render(new Date(start))}</strong>{" "}
-          {tt("{h}:{mm}").render(new Date(start))}–
-          {tt("{h}:{mm} {a}").render(new Date(end))}
-        </Text>
-      </Box>
-      <Heading variant="subheadline" sx={{ mt: 0, mb: 1 }}>
-        {title}
-      </Heading>
-      <Flex
-        sx={{
-          alignItems: "center",
-          color: "muted",
-        }}
-      >
-        {now(start, end)}
-        {!avatar?.includes("emoji") && (
-          <Avatar
-            src={avatar}
-            alt={`${leader} profile picture`}
-            size={24}
-            sx={{ height: 24, mr: 2 }}
-          />
-        )}
-        <Text as="span">{leader}</Text>
-      </Flex>
+      <Text>
+        <strong>{tt("{MM} {Do}").render(new Date(start))}</strong>{" "}
+        {tt("{h}:{mm}").render(new Date(start))}–
+        {tt("{h}:{mm} {a}").render(new Date(end))}
+      </Text>
     </Box>
+    <Heading variant="subheadline" sx={{ mt: 0, mb: 1 }}>
+      {title}
+    </Heading>
+    <Flex
+      sx={{
+        alignItems: "center",
+        color: "muted",
+      }}
+    >
+      {now(start, end)}
+      {!avatar?.includes("emoji") && (
+        <Avatar
+          src={avatar}
+          alt={`${leader} profile picture`}
+          size={24}
+          sx={{ height: 24, mr: 2 }}
+        />
+      )}
+      <Text as="span">{leader}</Text>
+    </Flex>
   </Link>
 );
 

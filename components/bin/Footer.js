@@ -1,32 +1,18 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { Box, Container, Grid, Heading, Link, Text } from "theme-ui";
-import theme from "../../lib/theme";
-import Icon from "../icon";
+import styled from "@emotion/styled"
+import { Box, Container, Grid, Heading, Link, Text } from "theme-ui"
+import theme from "../../lib/theme"
+import Icon from "../icon"
 
-const Base = styled(Box)(
-  (props) => `
-  background: ${
-    props.dark
-      ? `${theme.colors.darker} radial-gradient(${theme.colors.black} 1px, transparent 1px)`
-      : `${theme.colors.snow}`
-  };
-  ${props.dark ? "background-size: 32px 32px;" : ""}
+const Base = styled(Box)`
+  background: ${theme.colors.darker};
+  color: ${theme.colors.white};
   @media print {
     display: none;
   }
-`,
-);
+`
 
 export const Logo = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="128"
-    height="45"
-    fill="#8492A6"
-    viewBox="0 0 256 90"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="128" height="45" fill="#EC3750" viewBox="0 0 256 90" {...props}>
     <path d="M75.156 38.08l6.475 1.105s1.798-11.402-.224-10.199l-6.251 9.094zM204.85 34.495l2.161 5.06s5.237-2.106 4.619-4.915c-.537-2.442-3.098-1.496-5.641-.557h-.001c-.382.142-.764.282-1.138.412zM207.752 43.455s1.483 6.212 1.421 5.93c-.007-.093.397-.247 1.002-.477 2.014-.766 6.257-2.379 4.999-5.453-1.636-3.997-7.422 0-7.422 0z" />
     <path
       fillRule="evenodd"
@@ -34,7 +20,7 @@ export const Logo = (props) => (
       clipRule="evenodd"
     />
   </svg>
-);
+)
 
 const Service = ({ href, icon, name = "", ...props }) => (
   <Link
@@ -42,53 +28,63 @@ const Service = ({ href, icon, name = "", ...props }) => (
     rel="noopener me"
     href={href}
     title={`HackClub Butwal on ${name ? name : icon}`}
+    sx={{
+      color: "white",
+      "&:hover": {
+        color: "primary",
+      },
+    }}
     {...props}
   >
     <Icon glyph={icon} />
   </Link>
-);
+)
 
 const FooterLinks = () => (
   <Box>
-    <Heading as="h2" variant="subheadline" mb={3}>
-      Hack&nbsp;Club
+    <Heading as="h2" variant="subheadline" mb={3} sx={{ color: "white" }}>
+      Hack&nbsp;Club&nbsp;Butwal
     </Heading>
-    {/*
-    <NextLink href="/philosophy" passHref>
-      <Link>Philosophy</Link>
-    </NextLink>
-    <NextLink href="/team" passHref>
-      <Link>Our Team & Board</Link>
-    </NextLink>
-    <NextLink href="/jobs" passHref>
-      <Link>Jobs</Link>
-    </NextLink>
-    <NextLink href="/brand" passHref>
-      <Link>Brand</Link>
-    </NextLink>
-    <NextLink href="/press" passHref>
-      <Link>Press</Link>
-    </NextLink>
-    <NextLink href="/philanthropy" passHref>
-      <Link>Philanthropy</Link>
-    </NextLink>
-    */}
+    <Link href="/about" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      About Us
+    </Link>
+    <Link href="/community" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Community
+    </Link>
+    <Link href="/workshops" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Workshops
+    </Link>
+    <Link href="/gallery" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Gallery
+    </Link>
   </Box>
-);
+)
 
 const FooterResources = () => (
   <Box>
-    <Heading as="h2" variant="subheadline" mb={3}>
+    <Heading as="h2" variant="subheadline" mb={3} sx={{ color: "white" }}>
       Resources
     </Heading>
-    <Link href="https://hackclub.com/pizza">Clubs Pizza Grant</Link>
-    <Link href="https://events.hackclub.com/">Community Events</Link>
-    <Link href="https://jams.hackclub.com/">Jams</Link>
-    <Link href="https://toolbox.hackclub.com/">Toolbox</Link>
-    <Link href="https://directory.hackclub.com/">Clubs Directory</Link>
-    <Link href="https://hackclub.com/conduct/">Code of Conduct</Link>
+    <Link href="https://hackclub.com/pizza" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Clubs Pizza Grant
+    </Link>
+    <Link href="https://events.hackclub.com/" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Community Events
+    </Link>
+    <Link href="https://jams.hackclub.com/" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Jams
+    </Link>
+    <Link href="https://toolbox.hackclub.com/" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Toolbox
+    </Link>
+    <Link href="https://directory.hackclub.com/" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Clubs Directory
+    </Link>
+    <Link href="https://hackclub.com/conduct/" sx={{ color: "muted", "&:hover": { color: "white" } }}>
+      Code of Conduct
+    </Link>
   </Box>
-);
+)
 
 const FooterBranding = ({ email }) => (
   <Box sx={{ gridColumn: ["span 2", "span 1"] }}>
@@ -105,72 +101,34 @@ const FooterBranding = ({ email }) => (
         a: {
           lineHeight: 0,
           mb: 0,
-            color: "primary",
+          color: "muted",
           transition: "transform .125s ease-in-out, color .125s ease-in-out",
-            ":hover,:focus": {transform: "scale(1.125)", color: "secondary"},
+          ":hover,:focus": { transform: "scale(1.125)", color: "primary" },
         },
         placeItems: "center",
       }}
     >
-      <Service
-        href="https://facebook.com/messages/t/hackclub"
-        icon="messenger-fill"
-        name="Messenger"
-      />
-      <Service
-        href="https://twitter.com/hackclub"
-        icon="twitter"
-        name="Twitter"
-      />
-      <Service href="https://github.com/hackclub" icon="github" name="GitHub" />
-      <Service
-        href="https://figma.com/@hackclub"
-        icon="figma-fill"
-        name="Figma"
-      />
-      <Service
-        href="https://facebook.com/hackclub"
-        icon="facebook"
-        name="Facebook"
-      />
-      <Service
-        href="https://www.youtube.com/c/HackClubHQ"
-        icon="youtube"
-        name="YouTube"
-      />
-      <Service
-        href="https://www.instagram.com/starthackclub"
-        icon="instagram"
-        name="Instagram"
-      />
+      <Service href="https://facebook.com/hackclubbutwal" icon="facebook" name="Facebook" />
+      <Service href="https://twitter.com/hackclubbutwal" icon="twitter" name="Twitter" />
+      <Service href="https://github.com/hackclub-butwal" icon="github" name="GitHub" />
+      <Service href="https://www.instagram.com/hackclubbutwal" icon="instagram" name="Instagram" />
+      <Service href="https://www.youtube.com/c/hackclubbutwal" icon="youtube" name="YouTube" />
       <Service href={`mailto:${email}`} icon="email-fill" name="Email" />
     </Grid>
-    <Text my={2}>
-        <Link href="tel:1-855-625-HACK" sx={{color: "primary"}}>
-            1-855-625-HACK
-        </Link>
+    <Text my={2} sx={{ color: "muted" }}>
+      <Link href={`mailto:${email}`} sx={{ color: "primary", "&:hover": { color: "white" } }}>
+        {email}
+      </Link>
       <br />
       <Text as="span" color="muted">
-        (call toll-free)
+        Butwal, Nepal
       </Text>
     </Text>
   </Box>
-);
+)
 
-const Footer = ({
-  dark = false,
-  email = "team@hackclub.com",
-  children = undefined,
-  ...props
-}) => (
-  <Base
-    color={dark ? "muted" : "slate"}
-    py={[4, 5]}
-    dark={dark ? true : undefined}
-    sx={{ textAlign: "left" }}
-    as="footer"
-    {...props}
-  >
+const Footer = ({ email = "hello@hackclubbutwal.com", children = undefined, ...props }) => (
+  <Base py={[4, 5]} sx={{ textAlign: "left" }} as="footer" {...props}>
     <Container px={[3, null, 4]}>
       {children}
       <Grid
@@ -181,34 +139,33 @@ const Footer = ({
           px: 0,
           a: {
             textDecoration: "none",
-              color: "primary",
+            color: "muted",
             transition: "0.125s color ease-in-out",
-              ":hover,:focus": {
-                  color: "secondary",
-                  textDecoration: "underline",
-              },
+            ":hover,:focus": {
+              color: "white",
+              textDecoration: "underline",
+            },
           },
           "> div > a": {
             display: "block",
             mb: 2,
           },
-            h2: {color: dark ? "white" : "text", fontSize: 3},
+          h2: { color: "white", fontSize: 3 },
           "a,p": { fontSize: 2 },
         }}
       >
         <FooterLinks />
         <FooterResources />
-        <FooterBranding email={"hackclubbutwal@duck.com"} />
+        <FooterBranding email={email} />
       </Grid>
-        <Text as="p" variant="caption" sx={{mt: 3, color: "muted"}}>
-            © {new Date().getFullYear()} Hack&nbsp;Club. 501(c)(3) nonprofit
-            (EIN:&nbsp;81-2908499)
+      <Text as="p" variant="caption" sx={{ mt: 3, color: "muted" }}>
+        © {new Date().getFullYear()} Hack&nbsp;Club&nbsp;Butwal. Part of the global Hack Club network.
       </Text>
-        <Text as="p" variant="caption" sx={{mt: 1, color: "muted"}}>
+      <Text as="p" variant="caption" sx={{ mt: 1, color: "muted" }}>
         HackClub&nbsp;Butwal&nbsp;is&nbsp;fiscally&nbsp;sponsored&nbsp;by&nbsp;The&nbsp;Hack&nbsp;Foundation&nbsp;(d.b.a.&nbsp;Hack&nbsp;Club),&nbsp;a&nbsp;501(c)(3)&nbsp;nonprofit&nbsp;(EIN:&nbsp;81-2908499).
       </Text>
     </Container>
   </Base>
-);
+)
 
-export default Footer;
+export default Footer

@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import { css, keyframes } from "@emotion/react";
-import { Box, Container, Flex, Link } from "theme-ui";
-import theme from "../lib/theme";
-import Icon from "./icon";
-import NextLink from "next/link";
-import { Logo } from "./bin/Footer";
+"use client"
 
-const rgbaBgColor = (props, opacity) =>
-  `rgba(${props.bgColor[0]},${props.bgColor[1]},${props.bgColor[2]},${opacity})`;
+import { useEffect, useState } from "react"
+import styled from "@emotion/styled"
+import { css, keyframes } from "@emotion/react"
+import { Box, Container, Flex } from "theme-ui"
+import theme from "../lib/theme"
+import Icon from "./icon"
+import Link from "next/link"
+import { Logo } from "./bin/Footer"
+
+const rgbaBgColor = (props, opacity) => `rgba(${props.bgColor[0]},${props.bgColor[1]},${props.bgColor[2]},${opacity})`
 
 const fixed = (props) =>
   (props.scrolled || props.toggled || props.fixed) &&
   css`
-    background-color: ${rgbaBgColor(props, 0.96875)};
+    background-color: ${rgbaBgColor(props, 0.98)};
     border-bottom: 1px solid rgba(48, 48, 48, 0.125);
     @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-      background-color: ${props.transparent
-        ? "transparent"
-        : rgbaBgColor(props, 0.75)};
+      background-color: ${props.transparent ? "transparent" : rgbaBgColor(props, 0.95)};
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       backdrop-filter: saturate(180%) blur(20px);
     }
-  `;
+  `
 
 const Root = styled(Box, {
-  shouldForwardProp: (prop) =>
-    !["bgColor", "scrolled", "toggled"].includes(prop),
+  shouldForwardProp: (prop) => !["bgColor", "scrolled", "toggled"].includes(prop),
 })`
   position: fixed;
   top: 0;
   width: 100vw;
   z-index: 1000;
+  background-color: ${(props) => rgbaBgColor(props, 0.95)};
+  border-bottom: 1px solid rgba(48, 48, 48, 0.1);
   ${fixed};
   @media print {
     display: none;
   }
-`;
+`
 
 export const Content = styled(Container)`
   display: flex;
@@ -44,7 +44,8 @@ export const Content = styled(Container)`
   justify-content: space-between;
   position: relative;
   z-index: 2;
-`;
+  padding: 12px 16px;
+`
 
 const hoverColor = (name) =>
   ({
@@ -54,12 +55,12 @@ const hoverColor = (name) =>
     slate: "black",
     black: "slate",
     primary: "error",
-  })[name] || "black";
+  })[name] || "black"
 
 const slide = keyframes({
   from: { transform: "translateY(-25%)", opacity: 0 },
   to: { transform: "translateY(0)", opacity: 1 },
-});
+})
 
 const layout = (props) =>
   props.isMobile
@@ -69,18 +70,26 @@ const layout = (props) =>
         overflow-y: auto;
         text-align: left;
         height: 100vh;
+        background-color: #f8f9fa;
         @media (prefers-reduced-motion: no-preference) {
           animation: ${slide} 0.25s ease-in;
         }
         a {
-          color: ${theme.colors[props.dark ? "white" : "black"]} !important;
+          color: #222 !important;
           margin: 0 auto;
-          height: 64px;
-          font-weight: bold;
-          font-size: ${theme.fontSizes[2]}px;
+          height: 48px;
+          font-weight: 600;
+          font-size: 1rem;
           width: 100vw;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           &:not(:last-child) {
-            border-bottom: 1px solid rgba(48, 48, 48, 0.125);
+            border-bottom: 1px solid #e9ecef;
+          }
+          &:hover {
+            background-color: #ececec;
+            color: #EC3750 !important;
           }
           @media screen and (max-width: 22em) {
             max-width: 16rem;
@@ -93,52 +102,41 @@ const layout = (props) =>
           justify-content: flex-end;
         }
         a {
-          font-size: 18px;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #222;
           &:hover {
-            color: ${theme.colors[hoverColor(props.color)]};
+            color: #EC3750;
           }
         }
-      `;
+      `
+
 const NavBar = styled(Box, {
   shouldForwardProp: (prop) => !["isMobile", "toggled"].includes(prop),
 })`
   display: none;
   ${layout};
   a {
-    margin-left: ${theme.space[1]}px;
-    padding: ${theme.space[3]}px;
+    margin-left: ${theme.space[2]}px;
+    padding: ${theme.space[3]}px ${theme.space[2]}px;
     text-decoration: none;
+    transition: color 0.2s ease;
     @media (min-width: 56em) {
-      color: ${(props) => theme.colors[props.color] || props.color};
+      color: ${theme.colors.black};
     }
   }
-`;
+`
 
 const Navigation = (props) => (
   <NavBar role="navigation" {...props}>
-    <NextLink href="/" passHref>
-      <Link>Home</Link>
-    </NextLink>
-    <NextLink href="/about" passHref>
-      <Link>About</Link>
-    </NextLink>
-    <NextLink href="/community" passHref>
-      <Link>Community</Link>
-    </NextLink>
-    <NextLink href="/workshops" passHref>
-      <Link>Workshops</Link>
-    </NextLink>
-    <NextLink href="/team" passHref>
-      <Link>Team</Link>
-    </NextLink>
-    <NextLink href="/sponsors" passHref>
-      <Link>Sponsors</Link>
-    </NextLink>
-    <NextLink href="/contact" passHref>
-      <Link>Contact</Link>
-    </NextLink>
+    <Link href="/">Home</Link>
+    <Link href="/about">About</Link>
+    <Link href="/community">Community</Link>
+    <Link href="/workshops">Workshops</Link>
+    <Link href="/gallery">Gallery</Link>
+    <Link href="/contact">Contact</Link>
   </NavBar>
-);
+)
 
 const ToggleContainer = styled(Flex)`
   align-items: center;
@@ -148,159 +146,105 @@ const ToggleContainer = styled(Flex)`
   cursor: pointer;
   user-select: none;
   margin-left: auto;
+  color: ${theme.colors.black};
   @media (min-width: 56em) {
     display: none;
   }
-`;
-
-function computedColors(dark, color, scrolled, toggled) {
-  const baseColor = dark
-    ? color || "white"
-    : color === "white" && scrolled
-      ? "black"
-      : color;
-  const toggleColor = dark
-    ? color || "snow"
-    : toggled || (color === "white" && scrolled)
-      ? "slate"
-      : color;
-  return { baseColor, toggleColor };
-}
+`
 
 function useHeaderState(unfixed) {
-  const [scrolled, setScrolled] = useState(false);
-  const [toggled, setToggled] = useState(false);
-  const [mobile, setMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [toggled, setToggled] = useState(false)
+  const [mobile, setMobile] = useState(false)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!unfixed) {
-        const onScroll = () => setScrolled(window.scrollY >= 16);
-        window.addEventListener("scroll", onScroll);
-        // Clean up scroll event
-        return () => window.removeEventListener("scroll", onScroll);
+        const onScroll = () => setScrolled(window.scrollY >= 16)
+        window.addEventListener("scroll", onScroll)
+        return () => window.removeEventListener("scroll", onScroll)
       }
     }
-  }, [unfixed]);
+  }, [unfixed])
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const mobileQuery = window.matchMedia("(max-width: 48em)");
+      const mobileQuery = window.matchMedia("(max-width: 56em)")
       const handleChange = () => {
-        setMobile(true);
-        setToggled(false);
-      };
-      mobileQuery.addEventListener("change", handleChange);
-      // Clean up mobile query event
-      return () => mobileQuery.removeEventListener("change", handleChange);
+        setMobile(mobileQuery.matches)
+        if (!mobileQuery.matches) {
+          setToggled(false)
+        }
+      }
+      handleChange()
+      mobileQuery.addEventListener("change", handleChange)
+      return () => mobileQuery.removeEventListener("change", handleChange)
     }
-  }, []);
+  }, [])
 
-  return { scrolled, toggled, setToggled, mobile };
+  return { scrolled, toggled, setToggled, mobile }
 }
 
 function LogoLink() {
   return (
-    <NextLink href="/" passHref>
-      <Link
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          fontWeight: "bold",
-          fontSize: 3,
-        }}
-      >
-        <Logo style={{ height: 36, marginRight: 12 }} />
-        Hack Club Butwal
-      </Link>
-    </NextLink>
-  );
+    <Link
+      href="/"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        fontWeight: "bold",
+        fontSize: "1.1rem",
+        color: "#222",
+        textDecoration: "none",
+        transition: "color 0.2s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.color = "#EC3750"
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.color = "#222"
+      }}
+    >
+      <Logo style={{ height: 28, marginRight: 10 }} />
+      Hack Club Butwal
+    </Link>
+  )
 }
 
-function NavigationWrapper({ isMobile, toggled, baseColor, dark, mobile }) {
-  return (
-    <Navigation
-      as="nav"
-      aria-hidden={isMobile ? !mobile : !!mobile}
-      isMobile={isMobile}
-      toggled={toggled}
-      color={baseColor}
-      dark={dark}
-    />
-  );
+function NavigationWrapper({ isMobile, toggled, mobile }) {
+  return <Navigation as="nav" aria-hidden={isMobile ? !toggled : false} isMobile={isMobile} toggled={toggled} />
 }
 
-function HeaderNavigation({ baseColor, dark, mobile }) {
-  return (
-    <NavigationWrapper
-      isMobile={false}
-      baseColor={baseColor}
-      dark={dark}
-      mobile={mobile}
-    />
-  );
+function HeaderNavigation({ mobile }) {
+  return <NavigationWrapper isMobile={false} mobile={mobile} />
 }
 
-function HeaderToggle({ toggleColor, onToggle, toggled }) {
+function HeaderToggle({ onToggle, toggled }) {
   return (
-    <ToggleContainer color={toggleColor} onClick={onToggle}>
+    <ToggleContainer onClick={onToggle}>
       <Icon glyph={toggled ? "view-close" : "menu"} />
     </ToggleContainer>
-  );
+  )
 }
 
-function Header({ unfixed, color, bgColor, dark, fixed, ...props }) {
-  const { scrolled, toggled, setToggled, mobile } = useHeaderState(unfixed);
-  const { baseColor, toggleColor } = computedColors(
-    dark,
-    color,
-    scrolled,
-    toggled,
-  );
-  const handleToggleMenu = () => setToggled((t) => !t);
+function Header({ unfixed, fixed, ...props }) {
+  const { scrolled, toggled, setToggled, mobile } = useHeaderState(unfixed)
+  const handleToggleMenu = () => setToggled((t) => !t)
 
   return (
-    <Root
-      {...props}
-      fixed={fixed}
-      scrolled={scrolled}
-      toggled={toggled}
-      dark={dark}
-      bgColor={bgColor || (dark ? [32, 34, 36] : [255, 255, 255])}
-      as="header"
-    >
+    <Root {...props} fixed={fixed} scrolled={scrolled} toggled={toggled} bgColor={[255, 255, 255]} as="header">
       <Content>
         <LogoLink />
-        <HeaderNavigation baseColor={baseColor} dark={dark} mobile={mobile} />
-        <HeaderToggle
-          toggleColor={toggleColor}
-          onToggle={handleToggleMenu}
-          toggled={toggled}
-        />
+        <HeaderNavigation mobile={mobile} />
+        <HeaderToggle onToggle={handleToggleMenu} toggled={toggled} />
       </Content>
-      <NavigationWrapper
-        isMobile={true}
-        toggled={toggled}
-        baseColor={baseColor}
-        dark={dark}
-        mobile={mobile}
-      />
+      <NavigationWrapper isMobile={true} toggled={toggled} mobile={mobile} />
     </Root>
-  );
+  )
 }
 
 Header.defaultProps = {
-  color: "white",
-};
-
-export default Header;
-
-function shouldReturnSlate(color, toggled, scrolled) {
-  return toggled || (color === "white" && scrolled);
+  color: "black",
 }
 
-function getToggleColor(dark, color, toggled, scrolled) {
-  if (dark) return color || "snow";
-  if (shouldReturnSlate(color, toggled, scrolled)) return "slate";
-  return color;
-}
+export default Header

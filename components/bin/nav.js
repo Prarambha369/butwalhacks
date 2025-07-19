@@ -1,268 +1,140 @@
-import { useState, useEffect } from "react";
-import { Flex, Box, NavLink, Heading, Container } from "theme-ui";
-import Image from "next/image";
-import ThemeToggle from "../ThemeToggle";
-import HamburgerMenu from "./HamburgerMenu";
-import { useRouter } from "next/router";
+"use client"
 
-const LOGO_CLICK_KEY = "bin_nav_logo_clicks";
-const MAGIC_TRIGGER = 9;
-const REVERSE_TRIGGER = 1;
+import { useState, useEffect } from "react"
+import { Box, Container, Flex, Button } from "theme-ui"
+import Link from "next/link"
+import { Logo } from "./Footer"
 
-function NavLinkItem({ link, direction, onClick }) {
-  return (
-    <NavLink
-      key={link.href}
-      href={link.href}
-      sx={{
-        px: direction === "row" ? 2 : 0,
-        py: direction === "column" ? 3 : 0,
-        fontSize: direction === "column" ? 3 : "inherit",
-        width: direction === "column" ? "100%" : "auto",
-        textAlign: direction === "column" ? "center" : "left",
-        borderRadius: direction === "column" ? "default" : 0,
-        transition: "background 0.2s, color 0.2s",
-        color: "text",
-        "&:hover": {
-          bg: "muted",
-          color: "primary",
-          textDecoration: "none",
-        },
-      }}
-      onClick={onClick}
-    >
-      {link.label}
-    </NavLink>
-  );
-}
-
-function NavLinks({ direction = "row", onClick }) {
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/workshops", label: "Workshops" },
-    { href: "/community", label: "Community" },
-    { href: "/sponsors", label: "Sponsors" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/contact", label: "Contact" },
-  ];
-  return (
-    <Flex
-      as="nav"
-      sx={{
-        flexDirection: direction,
-        alignItems: direction === "row" ? "center" : "flex-start",
-        gap: direction === "row" ? 2 : 0,
-        width: direction === "column" ? "100%" : "auto",
-        justifyContent: direction === "row" ? "center" : "flex-start",
-      }}
-    >
-      {links.map((link) => (
-        <NavLinkItem
-          key={link.href}
-          link={link}
-          direction={direction}
-          onClick={onClick}
-        />
-      ))}
-    </Flex>
-  );
-}
-
-/**
- * Renders the site logo and heading, changing appearance when the magic feature is active.
- *
- * Displays a clickable logo image and heading text. When `magicActive` is true, both the logo and heading use alternate styles and content. Clicking the logo triggers the provided handler.
- *
- * @param {Object} props
- * @param {number} props.clicks - The current number of logo clicks.
- * @param {Function} props.handleLogoClick - Handler for logo click events.
- * @param {boolean} props.hovered - Hover state for the logo (unused).
- * @param {Function} props.setHovered - Setter for hover state (unused).
- * @param {boolean} props.magicActive - Whether the magic feature is active, affecting logo and heading display.
- */
-function Logo({ clicks, handleLogoClick, hovered, setHovered, magicActive }) {
-  return (
-    <Flex sx={{ alignItems: "center" }}>
-      <Box
-        onClick={handleLogoClick}
-        sx={{
-          cursor: "pointer",
-          mr: 2,
-          "@keyframes heartbeat": {
-            "0%": { transform: "scale(1)" },
-            "14%": { transform: "scale(1.1)" },
-            "28%": { transform: "scale(1)" },
-            "42%": { transform: "scale(1.1)" },
-            "70%": { transform: "scale(1)" },
-          },
-          "&:hover": {
-            animation: "heartbeat 1.5s ease-in-out infinite",
-          },
-        }}
-      >
-        <Image
-          src={
-              magicActive ? "/assets/logo/blogo.svg" : "/assets/logo/rlogo.svg"
-          }
-          alt={magicActive ? "Butwal Hacks logo" : "HackClub Butwal logo"}
-          width={40}
-          height={40}
-        />
-      </Box>
-      <Heading
-        as="h2"
-        onClick={handleLogoClick}
-        sx={{
-          fontSize: 2,
-          m: 0,
-          transition: "all 0.3s ease-in-out",
-          cursor: "pointer",
-          display: ["none", "block"],
-          color: "text",
-        }}
-      >
-        {magicActive ? "Butwal Hacks" : "HackClub Butwal"}
-      </Heading>
-    </Flex>
-  );
-}
-
-function DesktopNav({ magicActive }) {
-  return (
-    <Flex
-      sx={{ display: ["none", "none", "flex"], alignItems: "center", gap: 3 }}
-    >
-      <NavLinks direction="row" />
-      <ThemeToggle />
-    </Flex>
-  );
-}
-function MobileNav({ isMenuOpen, toggleMenu }) {
-  return (
-    <Flex sx={{ alignItems: "center", display: ["flex", "flex", "none"] }}>
-      <ThemeToggle />
-      <HamburgerMenu isOpen={isMenuOpen} toggle={toggleMenu} />
-    </Flex>
-  );
-}
-function MobileMenu({ isMenuOpen, onClose }) {
-  return (
-    <Box
-      sx={{
-        display: isMenuOpen ? "block" : "none",
-        position: "fixed",
-        top: "60px",
-        left: 0,
-        right: 0,
-        bottom: 0,
-        bg: "background",
-        p: 4,
-        zIndex: 999,
-        overflowY: "auto",
-        boxShadow: "0 8px 32px rgba(30,80,160,0.10)",
-      }}
-      onClick={onClose}
-    >
-      <NavLinks direction="column" onClick={onClose} />
-    </Box>
-  );
-}
-export default function BinNav() {
-  const [clicks, setClicks] = useState(0);
-  const [hovered, setHovered] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [magicActive, setMagicActive] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    // Load click count from localStorage
-    const stored = parseInt(localStorage.getItem(LOGO_CLICK_KEY) || "0", 10);
-    setClicks(stored);
-    setMagicActive(stored >= MAGIC_TRIGGER);
-  }, []);
-
-  useEffect(() => {
-    // Save click count to localStorage
-    localStorage.setItem(LOGO_CLICK_KEY, clicks);
-    setMagicActive(clicks >= MAGIC_TRIGGER);
-  }, [clicks]);
-
-  const handleLogoClick = () => {
-    let newClicks = clicks + 1;
-    if (magicActive) {
-      // Reset magic on first click after activation
-      setClicks(0);
-      setMagicActive(false);
-      localStorage.setItem(LOGO_CLICK_KEY, "0");
-      router.reload();
-      return;
-    }
-    setClicks(newClicks);
-    if (newClicks < MAGIC_TRIGGER) {
-      localStorage.setItem(LOGO_CLICK_KEY, newClicks);
-      router.reload();
-    }
-    // If magicActive, don't reload, just show magic
-  };
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
-
-  useEffect(() => {
-    const handleRouteChange = () => setIsMenuOpen(false);
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => router.events.off("routeChangeComplete", handleRouteChange);
-  }, [router]);
+export default function Nav({ color = "primary", dark = false }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/community", label: "Community" },
+    { href: "/workshops", label: "Workshops" },
+    { href: "/gallery", label: "Gallery" },
+    { href: "/contact", label: "Contact" },
+  ]
 
   return (
     <Box
-      as="header"
+      as="nav"
       sx={{
-        position: "sticky",
+        position: "fixed",
         top: 0,
-        width: "100%",
+        left: 0,
+        right: 0,
         zIndex: 1000,
-        bg: "background",
-        boxShadow: isScrolled ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
-        transition: "all 0.3s ease-in-out",
-        backdropFilter: "blur(10px)",
-        borderBottom: "1px solid",
-        borderColor: "muted",
-        minHeight: 60,
+        bg: "linear-gradient(135deg, #2C3E50 0%, #34495E 100%)",
+        color: "white",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "0 2px 12px 0 rgba(44,62,80,0.07)",
+        transition: "all 0.3s ease",
+        py: 2,
+        fontSize: [1, 2],
+        letterSpacing: "0.01em",
       }}
     >
       <Container>
-        <Flex
-          as="nav"
-          sx={{
-            px: 3,
-            py: 2,
+        <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
+          {/* Logo */}
+          <Link href="/" style={{
+            display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            minHeight: 60,
-          }}
-        >
-          <Logo
-            clicks={clicks}
-            handleLogoClick={handleLogoClick}
-            hovered={hovered}
-            setHovered={setHovered}
-            magicActive={magicActive}
-          />
-          <DesktopNav magicActive={magicActive} />
-          <MobileNav isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            textDecoration: "none",
+            color: "white",
+            fontWeight: "bold",
+            fontSize: "1.1rem",
+            letterSpacing: "0.01em",
+            transition: "color 0.2s ease",
+            marginRight: "1rem",
+          }}>
+            <Logo style={{ height: 28, marginRight: 8 }} />
+            HackClub Butwal
+          </Link>
+
+          {/* Desktop Navigation */}
+          <Flex
+            sx={{
+              display: ["none", null, "flex"],
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} style={{
+                color: "white",
+                textDecoration: "none",
+                fontWeight: "medium",
+                fontSize: "0.9rem",
+                letterSpacing: "0.01em",
+                transition: "color 0.2s ease",
+              }}>
+                {item.label}
+              </Link>
+            ))}
+          </Flex>
+
+          {/* Mobile Menu Button */}
+          <Button
+            sx={{
+              display: ["block", null, "none"],
+              bg: "transparent",
+              border: "none",
+              color: "white",
+              fontSize: 3,
+              cursor: "pointer",
+            }}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "✕" : "☰"}
+          </Button>
         </Flex>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <Box
+            sx={{
+              display: ["block", null, "none"],
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              bg: "white",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              borderRadius: "lg",
+              mt: 2,
+              p: 3,
+            }}
+          >
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} style={{
+                display: "block",
+                color: "#222",
+                textDecoration: "none",
+                padding: "0.5rem 0",
+                borderBottom: "1px solid #e9ecef",
+                fontSize: "0.9rem",
+                transition: "color 0.2s ease",
+              }}
+              onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </Box>
+        )}
       </Container>
-      <MobileMenu isMenuOpen={isMenuOpen} onClose={closeMenu} />
     </Box>
-  );
+  )
 }
