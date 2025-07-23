@@ -1,70 +1,3 @@
-In
-components / ui / sidebar.tsx
-around
-lines
-654
-to
-656, the
-width
-is
-generated
-randomly
-on
-each
-render
-causing
-potential
-SSR
-hydration
-mismatches.To
-fix
-this,
-    make
-the
-width
-stable
-by
-allowing
-it
-to
-be
-passed as a
-prop
-to
-the
-SidebarMenuSkeleton
-component
-or
-use
-a
-deterministic
-value
-based
-on
-an
-index
-or
-key
-if rendering a
-list.Replace
-the
-random
-width
-calculation
-with a fixed
-or
-prop - based
-width
-to
-ensure
-consistent
-rendering
-between
-server
-and
-client.
-"use client"
-
 import * as React from "react"
 import * as MenubarPrimitive from "@radix-ui/react-menubar"
 import { Check, ChevronRight, Circle } from "lucide-react"
@@ -72,13 +5,9 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const MenubarMenu = MenubarPrimitive.Menu
-
 const MenubarGroup = MenubarPrimitive.Group
-
 const MenubarPortal = MenubarPrimitive.Portal
-
 const MenubarSub = MenubarPrimitive.Sub
-
 const MenubarRadioGroup = MenubarPrimitive.RadioGroup
 
 const Menubar = React.forwardRef<

@@ -9,6 +9,7 @@ import theme from "../lib/theme"
 import Icon from "./icon"
 import Link from "next/link"
 import { Logo } from "./bin/Footer"
+import './Header.module.css'; // If not already imported, or add styles below
 
 const rgbaBgColor = (props, opacity) => `rgba(${props.bgColor[0]},${props.bgColor[1]},${props.bgColor[2]},${opacity})`
 
@@ -187,18 +188,18 @@ function useHeaderState(unfixed) {
 }
 
 function LogoLink() {
-    className = "logo-link"
   return (
     <Link
       href="/"
+      className="logo-link"
       style={{
         display: "flex",
         alignItems: "center",
         fontWeight: "bold",
         fontSize: "1.1rem",
         color: "#222",
-      onMouseLeave={(e) => {
-        e.target.style.color = "#222"
+          textDecoration: "none",
+          transition: "color 0.2s ease"
       }}
     >
       <Logo style={{ height: 28, marginRight: 10 }} />
@@ -244,3 +245,9 @@ Header.defaultProps = {
 }
 
 export default Header
+
+/* Add to global CSS or Header.module.css:
+.logo-link:hover {
+  color: #EC3750 !important;
+}
+*/
