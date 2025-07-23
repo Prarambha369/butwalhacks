@@ -9,7 +9,6 @@ import theme from "../lib/theme"
 import Icon from "./icon"
 import Link from "next/link"
 import { Logo } from "./bin/Footer"
-import './Header.module.css'; // If not already imported, or add styles below
 
 const rgbaBgColor = (props, opacity) => `rgba(${props.bgColor[0]},${props.bgColor[1]},${props.bgColor[2]},${opacity})`
 
@@ -111,41 +110,20 @@ const layout = (props) =>
             color: #EC3750;
           }
         }
-
-              .logo-link:hover {
-                  color: #EC3750 !important;
-              }
+      `
 
 const NavBar = styled(Box, {
   shouldForwardProp: (prop) => !["isMobile", "toggled"].includes(prop),
 })`
-none;
-$
-{
-    layout
-}
+  display: none;
+  ${layout};
   a {
     margin-left: ${theme.space[2]}px;
-    $
-    {
-        theme.space[3]
-    }
-    px
-    $
-    {
-        theme.space[2]
-    }
-    px;
+    padding: ${theme.space[3]}px ${theme.space[2]}px;
     text-decoration: none;
-    color
-    0.2
-    s
-    ease;
+    transition: color 0.2s ease;
     @media (min-width: 56em) {
-        $
-        {
-            theme.colors.black
-        }
+      color: ${theme.colors.black};
     }
   }
 `
@@ -166,15 +144,12 @@ const ToggleContainer = styled(Flex)`
   justify-content: center;
   min-width: 64px;
   min-height: 44px;
-pointer;
+  cursor: pointer;
   user-select: none;
   margin-left: auto;
-$
-{
-    theme.colors.black
-}
+  color: ${theme.colors.black};
   @media (min-width: 56em) {
-    none;
+    display: none;
   }
 `
 
@@ -269,9 +244,3 @@ Header.defaultProps = {
 }
 
 export default Header
-
-/* Add to global CSS or Header.module.css:
-.logo-link:hover {
-  color: #EC3750 !important;
-}
-*/

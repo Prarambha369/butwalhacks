@@ -19,10 +19,10 @@
       "fields": {
         "Title": "React Fundamentals",
         "Description": "Build interactive user interfaces with React. Learn components, state, and props",
-        "Date": "2024-03-22",
-        "Time": "14:00",
+        "Date": "2024-04-10",
+        "Time": "10:00",
         "DurationMinutes": 240,
-        "Instructor": "David Kim",
+        "Instructor": "David Lee",
         "Level": "Intermediate",
         "Image": "/images/logo/red_logo/rlogo.svg",
         "RegistrationLink": "/workshops/react-fundamentals"
@@ -31,57 +31,15 @@
     {
       "id": "rec3",
       "fields": {
-        "Title": "Python for Beginners",
-        "Description": "Start your programming journey with Python. Learn variables, loops, and functions",
-        "Date": "2024-03-29",
-        "Time": "14:00",
+        "Title": "Advanced Node.js",
+        "Description": "Deep dive into Node.js concepts like streams, clustering, and performance optimization",
+        "Date": "2024-05-20",
+        "Time": "13:00",
         "DurationMinutes": 180,
-        "Instructor": "Alex Johnson",
-        "Level": "Beginner",
-        "Image": "/images/logo/red_logo/rlogo.svg",
-        "RegistrationLink": "/workshops/python-beginners"
-      }
-    },
-    {
-      "id": "rec4",
-      "fields": {
-        "Title": "Build Your First API",
-        "Description": "Learn to create RESTful APIs using Node.js and Express",
-        "Date": "2024-04-05",
-        "Time": "14:00",
-        "DurationMinutes": 240,
-        "Instructor": "Priya Sharma",
-        "Level": "Intermediate",
-        "Image": "/images/logo/red_logo/rlogo.svg",
-        "RegistrationLink": "/workshops/api-development"
-      }
-    },
-    {
-      "id": "rec5",
-      "fields": {
-        "Title": "Mobile App Development",
-        "Description": "Build cross-platform mobile apps using React Native",
-        "Date": "2024-04-12",
-        "Time": "14:00",
-        "DurationMinutes": 300,
-        "Instructor": "Michael Davis",
+        "Instructor": "Maria Garcia",
         "Level": "Advanced",
         "Image": "/images/logo/red_logo/rlogo.svg",
-        "RegistrationLink": "/workshops/mobile-development"
-      }
-    },
-    {
-      "id": "rec6",
-      "fields": {
-        "Title": "Data Science with Python",
-        "Description": "Introduction to data analysis and visualization using pandas and matplotlib",
-        "Date": "2024-04-19",
-        "Time": "14:00",
-        "DurationMinutes": 240,
-        "Instructor": "Emma Wilson",
-        "Level": "Intermediate",
-        "Image": "/images/logo/red_logo/rlogo.svg",
-        "RegistrationLink": "/workshops/data-science"
+        "RegistrationLink": "/workshops/advanced-nodejs"
       }
     }
   ]
