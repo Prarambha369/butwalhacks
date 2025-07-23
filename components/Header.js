@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 "use client"
 
 import { useEffect, useState } from "react"
@@ -24,7 +25,7 @@ const fixed = (props) =>
   `
 
 const Root = styled(Box, {
-  shouldForwardProp: (prop) => !["bgColor", "scrolled", "toggled"].includes(prop),
+    shouldForwardProp: (prop) => !["bgColor", "scrolled", "toggled", "transparent"].includes(prop),
 })`
   position: fixed;
   top: 0;
@@ -186,6 +187,7 @@ function useHeaderState(unfixed) {
 }
 
 function LogoLink() {
+    className = "logo-link"
   return (
     <Link
       href="/"
@@ -195,12 +197,6 @@ function LogoLink() {
         fontWeight: "bold",
         fontSize: "1.1rem",
         color: "#222",
-        textDecoration: "none",
-        transition: "color 0.2s ease",
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.color = "#EC3750"
-      }}
       onMouseLeave={(e) => {
         e.target.style.color = "#222"
       }}

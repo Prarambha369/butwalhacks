@@ -648,12 +648,16 @@ const SidebarMenuSkeleton = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> & {
     showIcon?: boolean
+    width?: string
+    index?: number
   }
->(({ className, showIcon = false, ...props }, ref) => {
-  // Random width between 50 to 90%.
-  const width = React.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
-  }, [])
+>(({className, showIcon = false, width, index, ...props}, ref) => {
+    // Use prop width, or deterministic value based on index, or fallback to 70%
+    const skeletonWidth = width
+        ? width
+        : typeof index === "number"
+            ? `${60 + (index % 31)}%` // deterministic width between 60-90%
+            : "70%"
 
   return (
     <div
@@ -671,11 +675,9 @@ const SidebarMenuSkeleton = React.forwardRef<
       <Skeleton
         className="h-4 flex-1 max-w-[--skeleton-width]"
         data-sidebar="menu-skeleton-text"
-        style={
-          {
-            "--skeleton-width": width,
-          } as React.CSSProperties
-        }
+        style={{
+            "--skeleton-width": skeletonWidth,
+        } as React.CSSProperties}
       />
     </div>
   )
