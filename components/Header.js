@@ -111,20 +111,41 @@ const layout = (props) =>
             color: #EC3750;
           }
         }
-      `
+
+              .logo-link:hover {
+                  color: #EC3750 !important;
+              }
 
 const NavBar = styled(Box, {
   shouldForwardProp: (prop) => !["isMobile", "toggled"].includes(prop),
 })`
-  display: none;
-  ${layout};
+none;
+$
+{
+    layout
+}
   a {
     margin-left: ${theme.space[2]}px;
-    padding: ${theme.space[3]}px ${theme.space[2]}px;
+    $
+    {
+        theme.space[3]
+    }
+    px
+    $
+    {
+        theme.space[2]
+    }
+    px;
     text-decoration: none;
-    transition: color 0.2s ease;
+    color
+    0.2
+    s
+    ease;
     @media (min-width: 56em) {
-      color: ${theme.colors.black};
+        $
+        {
+            theme.colors.black
+        }
     }
   }
 `
@@ -145,12 +166,15 @@ const ToggleContainer = styled(Flex)`
   justify-content: center;
   min-width: 64px;
   min-height: 44px;
-  cursor: pointer;
+pointer;
   user-select: none;
   margin-left: auto;
-  color: ${theme.colors.black};
+$
+{
+    theme.colors.black
+}
   @media (min-width: 56em) {
-    display: none;
+    none;
   }
 `
 
@@ -198,8 +222,8 @@ function LogoLink() {
         fontWeight: "bold",
         fontSize: "1.1rem",
         color: "#222",
-          textDecoration: "none",
-          transition: "color 0.2s ease"
+        textDecoration: "none",
+        transition: "color 0.2s ease"
       }}
     >
       <Logo style={{ height: 28, marginRight: 10 }} />
