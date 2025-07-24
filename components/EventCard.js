@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Heading, Text, Flex, Box, Badge, Button} from "theme-ui";
+import {Card, Heading, Text, Flex, Box, Badge} from "theme-ui";
 import Image from "next/image";
 import Icon from "@hackclub/icons";
 
@@ -84,18 +84,7 @@ export default function EventCard({event}) {
                             </Badge>
                         ))}
                 </Flex>
-
-                <Button
-                    sx={{
-                        width: "100%",
-                        bg: "primary",
-                        "&:hover": {
-                            bg: "secondary",
-                        },
-                    }}
-                >
-                    Join Event
-                </Button>
+                {/* Removed Join Event button per request */}
             </Box>
         </Card>
     );

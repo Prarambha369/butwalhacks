@@ -118,6 +118,7 @@ export default function Workshops() {
                             fontSize: [5, 6, 7],
                             mb: 3,
                             fontWeight: "bold",
+                            color: "black",
                         }}
                     >
                         Workshops & Events
