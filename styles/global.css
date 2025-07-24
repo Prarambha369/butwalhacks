@@ -1,0 +1,252 @@
+@layer hack-club-theme {
+    :root {
+        /* Base Neutrals - Modern & Clean */
+        --darker: #0a0a0f;
+        --dark: #1a1a24;
+        --darkless: #2a2a3a;
+        --black: #1e293d;
+        --steel: #334155;
+        --slate: #475569;
+        --muted: #64748b;
+        --smoke: #e2e8f0;
+        --snow: #f8fafc;
+        --white: #ffffff;
+
+        /* Nepal-Inspired Primary Palette */
+        --crimson: #dc2626; /* Deep Nepal red */
+        --royal-blue: #1e40af; /* Nepal flag blue */
+        --saffron: #f59e0b; /* Warm accent */
+        --emerald: #059669; /* Success/growth */
+        --sky: #0ea5e9; /* Tech/innovation */
+        --violet: #7c3aed; /* Creative/modern */
+        --rose: #e11d48; /* Energy/passion */
+
+        /* Semantic Colors */
+        --success: var(--emerald);
+        --warning: var(--saffron);
+        --error: var(--rose);
+        --info: var(--sky);
+
+        /* Theme Variables */
+        --text: var(--black);
+        --background: var(--white);
+        --elevated: var(--white);
+        --sheet: var(--snow);
+        --sunken: var(--smoke);
+        --border: var(--smoke);
+
+        /* Brand Colors */
+        --primary: var(--crimson);
+        --secondary: var(--royal-blue);
+        --accent: var(--saffron);
+        --tertiary: var(--emerald);
+
+        /* Social Media */
+        --twitter: #1da1f2;
+        --facebook: #1877f2;
+        --instagram: #e4405f;
+        --github: #24292e;
+        --linkedin: #0a66c2;
+
+        /* Gradients */
+        --gradient-primary: linear-gradient(135deg, var(--crimson) 0%, var(--royal-blue) 100%);
+        --gradient-accent: linear-gradient(135deg, var(--saffron) 0%, var(--rose) 100%);
+        --gradient-success: linear-gradient(135deg, var(--emerald) 0%, var(--sky) 100%);
+
+        /* Spacing System */
+        --spacing-0: 0px;
+        --spacing-1: 4px;
+        --spacing-2: 8px;
+        --spacing-3: 12px;
+        --spacing-4: 16px;
+        --spacing-5: 24px;
+        --spacing-6: 32px;
+        --spacing-7: 48px;
+        --spacing-8: 64px;
+        --spacing-9: 96px;
+        --spacing-10: 128px;
+
+        /* Typography Scale */
+        --font-xs: 12px;
+        --font-sm: 14px;
+        --font-base: 16px;
+        --font-lg: 18px;
+        --font-xl: 20px;
+        --font-2xl: 24px;
+        --font-3xl: 30px;
+        --font-4xl: 36px;
+        --font-5xl: 48px;
+        --font-6xl: 60px;
+        --font-7xl: 72px;
+        --font-8xl: 96px;
+        --font-9xl: 128px;
+
+        /* Line Heights */
+        --line-height-none: 1;
+        --line-height-tight: 1.25;
+        --line-height-snug: 1.375;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.625;
+        --line-height-loose: 2;
+
+        /* Font Weights */
+        --font-weight-thin: 100;
+        --font-weight-light: 300;
+        --font-weight-normal: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 600;
+        --font-weight-bold: 700;
+        --font-weight-extrabold: 800;
+        --font-weight-black: 900;
+
+        /* Border Radius */
+        --radius-none: 0px;
+        --radius-sm: 2px;
+        --radius-base: 4px;
+        --radius-md: 6px;
+        --radius-lg: 8px;
+        --radius-xl: 12px;
+        --radius-2xl: 16px;
+        --radius-3xl: 24px;
+        --radius-full: 9999px;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+        /* Container Sizes */
+        --container-sm: 640px;
+        --container-md: 768px;
+        --container-lg: 1024px;
+        --container-xl: 1280px;
+        --container-2xl: 1536px;
+
+        /* Breakpoints */
+        --breakpoint-sm: 640px;
+        --breakpoint-md: 768px;
+        --breakpoint-lg: 1024px;
+        --breakpoint-xl: 1280px;
+        --breakpoint-2xl: 1536px;
+    }
+
+    /* Dark Mode */
+    [data-theme="dark"] {
+        --text: var(--white);
+        --background: var(--darker);
+        --elevated: var(--dark);
+        --sheet: var(--darkless);
+        --sunken: var(--black);
+        --border: var(--steel);
+        --muted: #94a3b8;
+
+        /* Adjust colors for dark mode */
+        --crimson: #ef4444;
+        --royal-blue: #3b82f6;
+        --saffron: #fbbf24;
+        --emerald: #10b981;
+        --sky: #38bdf8;
+        --violet: #8b5cf6;
+        --rose: #f43f5e;
+
+        --primary: var(--crimson);
+        --secondary: var(--royal-blue);
+        --accent: var(--saffron);
+        --tertiary: var(--emerald);
+    }
+
+    /* Base Styles */
+    body {
+        font-family: "Inter",
+        "Phantom Sans",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+        line-height: var(--line-height-normal);
+        font-weight: var(--font-weight-normal);
+        margin: 0;
+        min-height: 100vh;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        color: var(--text);
+        background-color: var(--background);
+        box-sizing: border-box;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Utility Classes */
+    .gradient-primary {
+        background: var(--gradient-primary);
+    }
+
+    .gradient-accent {
+        background: var(--gradient-accent);
+    }
+
+    .gradient-success {
+        background: var(--gradient-success);
+    }
+
+    .text-gradient-primary {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .nepal-flag-gradient {
+        background: linear-gradient(45deg, var(--crimson) 0%, var(--royal-blue) 50%, var(--crimson) 100%);
+    }
+
+    /* Enhanced Hover Effects */
+    .hover-lift {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .hover-glow {
+        transition: box-shadow 0.3s ease;
+    }
+
+    .hover-glow:hover {
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* Focus styles */
+    :focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+    .hover-underline-red::after,
+    .hover-underline-green::after {
+        /* ...existing underline styles... */
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+    }
+}

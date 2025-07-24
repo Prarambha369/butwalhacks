@@ -1,0 +1,88 @@
+{
+  "records": [
+    {
+      "id": "rec1",
+      "fields": {
+        "Name": "Alex Johnson",
+        "Role": "Founder & Lead Organizer",
+        "Bio": "Computer Science student passionate about building tech communities. Loves full-stack development and mentoring new programmers.",
+        "Skills": [
+          "Python",
+          "React",
+          "Leadership"
+        ],
+        "Avatar": "/images/logo/red_logo/rlogo.svg"
+      }
+    },
+    {
+      "id": "rec2",
+      "fields": {
+        "Name": "Sarah Chen",
+        "Role": "Workshop Coordinator",
+        "Bio": "Full-stack developer who loves teaching and mentoring. Specializes in modern web technologies and creating engaging learning experiences.",
+        "Skills": [
+          "JavaScript",
+          "Node.js",
+          "Teaching"
+        ],
+        "Avatar": "/images/logo/red_logo/rlogo.svg"
+      }
+    },
+    {
+      "id": "rec3",
+      "fields": {
+        "Name": "Michael Davis",
+        "Role": "Community Manager",
+        "Bio": "Tech enthusiast focused on creating inclusive spaces for learning. Expert in event management and building strong community connections.",
+        "Skills": [
+          "Event Planning",
+          "Community Building",
+          "Leadership"
+        ],
+        "Avatar": "/images/logo/red_logo/rlogo.svg"
+      }
+    },
+    {
+      "id": "rec4",
+      "fields": {
+        "Name": "Priya Sharma",
+        "Role": "Technical Lead",
+        "Bio": "Experienced developer with a passion for open source. Loves mentoring beginners and building scalable applications.",
+        "Skills": [
+          "Python",
+          "Django",
+          "DevOps"
+        ],
+        "Avatar": "/images/logo/red_logo/rlogo.svg"
+      }
+    },
+    {
+      "id": "rec5",
+      "fields": {
+        "Name": "David Kim",
+        "Role": "Workshop Instructor",
+        "Bio": "Frontend specialist who believes in the power of beautiful, accessible user interfaces. Enjoys teaching CSS and JavaScript.",
+        "Skills": [
+          "React",
+          "CSS",
+          "Accessibility"
+        ],
+        "Avatar": "/images/logo/red_logo/rlogo.svg"
+      }
+    },
+    {
+      "id": "rec6",
+      "fields": {
+        "Name": "Emma Wilson",
+        "Role": "Event Coordinator",
+        "Bio": "Creative problem solver who loves organizing hackathons and tech events. Passionate about creating memorable experiences.",
+        "Skills": [
+          "Event Planning",
+          "Marketing",
+          "Design"
+        ],
+        "Avatar": "/images/logo/red_logo/rlogo.svg"
+      }
+    }
+  ]
+} 

@@ -1,0 +1,88 @@
+{
+  "records": [
+    {
+      "id": "rec1",
+      "fields": {
+        "Title": "Introduction to Web Development",
+        "Description": "Learn the basics of HTML, CSS, and JavaScript to build your first website",
+        "Date": "2024-03-15",
+        "Time": "2:00 PM",
+        "Duration": "3 hours",
+        "Instructor": "Sarah Chen",
+        "Level": "Beginner",
+        "Image": "/images/logo/red_logo/rlogo.svg",
+        "RegistrationLink": "/workshops/web-dev-intro"
+      }
+    },
+    {
+      "id": "rec2",
+      "fields": {
+        "Title": "React Fundamentals",
+        "Description": "Build interactive user interfaces with React. Learn components, state, and props",
+        "Date": "2024-03-22",
+        "Time": "2:00 PM",
+        "Duration": "4 hours",
+        "Instructor": "David Kim",
+        "Level": "Intermediate",
+        "Image": "/images/logo/red_logo/rlogo.svg",
+        "RegistrationLink": "/workshops/react-fundamentals"
+      }
+    },
+    {
+      "id": "rec3",
+      "fields": {
+        "Title": "Python for Beginners",
+        "Description": "Start your programming journey with Python. Learn variables, loops, and functions",
+        "Date": "2024-03-29",
+        "Time": "2:00 PM",
+        "Duration": "3 hours",
+        "Instructor": "Alex Johnson",
+        "Level": "Beginner",
+        "Image": "/images/logo/red_logo/rlogo.svg",
+        "RegistrationLink": "/workshops/python-beginners"
+      }
+    },
+    {
+      "id": "rec4",
+      "fields": {
+        "Title": "Build Your First API",
+        "Description": "Learn to create RESTful APIs using Node.js and Express",
+        "Date": "2024-04-05",
+        "Time": "2:00 PM",
+        "Duration": "4 hours",
+        "Instructor": "Priya Sharma",
+        "Level": "Intermediate",
+        "Image": "/images/logo/red_logo/rlogo.svg",
+        "RegistrationLink": "/workshops/api-development"
+      }
+    },
+    {
+      "id": "rec5",
+      "fields": {
+        "Title": "Mobile App Development",
+        "Description": "Build cross-platform mobile apps using React Native",
+        "Date": "2024-04-12",
+        "Time": "2:00 PM",
+        "Duration": "5 hours",
+        "Instructor": "Michael Davis",
+        "Level": "Advanced",
+        "Image": "/images/logo/red_logo/rlogo.svg",
+        "RegistrationLink": "/workshops/mobile-development"
+      }
+    },
+    {
+      "id": "rec6",
+      "fields": {
+        "Title": "Data Science with Python",
+        "Description": "Introduction to data analysis and visualization using pandas and matplotlib",
+        "Date": "2024-04-19",
+        "Time": "2:00 PM",
+        "Duration": "4 hours",
+        "Instructor": "Emma Wilson",
+        "Level": "Intermediate",
+        "Image": "/images/logo/red_logo/rlogo.svg",
+        "RegistrationLink": "/workshops/data-science"
+      }
+    }
+  ]
+} 
