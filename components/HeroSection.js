@@ -180,18 +180,17 @@ function FooterText() {
  */
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
+  
+  // Set mounted state after component mounts (client-side only)
   useEffect(() => {
     setMounted(true);
-  }, []);
-  // Add class to body to hide default cursor
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.body.classList.add("custom-cursor");
-
-      return () => {
-        document.body.classList.remove("custom-cursor");
-      };
-    }
+    
+    // Add class to body to hide default cursor
+    document.body.classList.add("custom-cursor");
+    
+    return () => {
+      document.body.classList.remove("custom-cursor");
+    };
   }, []);
 
   return (

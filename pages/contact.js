@@ -89,6 +89,35 @@ export default function Contact() {
 
       <Header />
 
+      <style jsx global>{`
+        /* Ensure form inputs have black text */
+        input, textarea {
+          color: black !important;
+        }
+        
+        /* Style placeholders */
+        ::placeholder {
+          color: #666 !important;
+          opacity: 1;
+        }
+        
+        /* For Firefox */
+        ::-moz-placeholder {
+          color: #666 !important;
+          opacity: 1;
+        }
+        
+        /* For Internet Explorer */
+        :-ms-input-placeholder {
+          color: #666 !important;
+        }
+        
+        /* For Edge */
+        ::-ms-input-placeholder {
+          color: #666 !important;
+        }
+      `}</style>
+
       <Box
         sx={{
           bg: "#EC3750",

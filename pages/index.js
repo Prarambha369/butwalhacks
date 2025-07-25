@@ -2,13 +2,50 @@
 
 import { useState, useEffect } from "react"
 import { Box, Container, Heading, Text, Button, Grid, Flex } from "theme-ui"
+import dynamic from 'next/dynamic';
 import Header from "../components/Header"
 import Footer from "../components/bin/Footer"
-import CustomCursor from "../components/effects/CustomCursor"
-import DecorativeShapes from "../components/effects/DecorativeShapes"
-import HoverSparkles from "../components/effects/HoverSparkles"
-import Icon from "@hackclub/icons"
 import Link from "next/link"
+
+// Dynamically import components that might cause hydration issues
+const Icon = dynamic(() => import("@hackclub/icons"), { ssr: false });
+const CustomCursor = dynamic(
+  () => import('../components/Animation/CustomCursor'),
+  { ssr: false }
+);
+
+// Create a client-side only component for SVGs
+const FeatureIcon = ({ title }) => {
+  if (typeof window === 'undefined') return null;
+  
+  return (
+    <>
+      {title === "Build Community" && (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="9" cy="7" r="4" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )}
+      {title === "Create Projects" && (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.7 6.3l3 3M2 22l3-3m0 0l7.1-7.1a1 1 0 0 0 0-1.4l-3-3a1 1 0 0 0-1.4 0L2 15m3 3l3 3m7.1-13.1l3-3a2.12 2.12 0 0 1 3 3l-3 3" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )}
+      {title === "Win Competitions" && (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )}
+      {title === "Learn to Code" && (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      )}
+    </>
+  );
+};
 
 const stats = [
   { number: "40+", label: "Active Members" },
@@ -66,18 +103,9 @@ const upcomingEvents = [
 ]
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
-
   return (
-    <>
-      <CustomCursor />
-      <DecorativeShapes />
+    <Box sx={{ width: '100vw', maxWidth: '100vw', overflowX: 'hidden' }}>
+      {typeof window !== 'undefined' && <CustomCursor />}
       <Header />
 
       {/* Hero Section */}
@@ -86,6 +114,7 @@ export default function Home() {
           minHeight: "80vh",
           display: "flex",
           alignItems: "center",
+          position: "relative",
           backgroundImage: "url('/assets/favicon/index-bg.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -94,7 +123,19 @@ export default function Home() {
           mt: "80px",
         }}
       >
-        <Container>
+        {/* Overlay for dimming the background image */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            bg: "rgba(0,0,0,0.45)",
+            zIndex: 1,
+          }}
+        />
+        <Container sx={{ position: "relative", zIndex: 2 }}>
           <Grid columns={[1]} gap={[4, 5]} sx={{ alignItems: "center" }}>
             <Box>
               <Heading
@@ -139,7 +180,7 @@ export default function Home() {
                       fontWeight: 600,
                     }}
                   >
-                    <Icon glyph="member-add" size={20} />
+                    <Icon is="svg" glyph="member-add" size={20} />
                     Join Community
                   </Button>
                 </Link>
@@ -161,7 +202,7 @@ export default function Home() {
                       fontWeight: 600,
                     }}
                   >
-                    <Icon glyph="event" size={20} />
+                    <Icon is="svg" glyph="event" size={20} />
                     View Workshops
                   </Button>
                 </Link>
@@ -196,8 +237,8 @@ export default function Home() {
       </Box>
 
       {/* Features Section */}
-      <Box sx={{ py: [4, 5], bg: "#F8F9FA" }}>
-        <Container>
+      <Box sx={{ py: [4, 5], bg: "#F8F9FA", width: '100vw', overflowX: 'hidden' }}>
+        <Container sx={{ px: 0, maxWidth: '100vw', overflowX: 'hidden' }}>
           <Box sx={{ textAlign: "center", mb: [4, 5] }}>
             <Heading
               as="h2"
@@ -222,7 +263,7 @@ export default function Home() {
               Discover the opportunities that await you in our thriving tech community
             </Text>
           </Box>
-          <Grid columns={[1, 2, 4]} gap={[3, 4]}>
+          <Grid columns={[1, 2, 4]} gap={[3, 4]} sx={{overflowX: 'hidden', width: '100%', maxWidth: '100vw', m: 0}}>
             {features.map((feature, index) => (
               <Box
                 key={index}
@@ -232,6 +273,8 @@ export default function Home() {
                   borderRadius: 2,
                   textAlign: "center",
                   border: "1px solid #E9ECEF",
+                  minWidth: 0,
+                  overflow: 'hidden',
                 }}
               >
                 <Box
@@ -247,7 +290,7 @@ export default function Home() {
                     mb: 3,
                   }}
                 >
-                  <Icon glyph={feature.icon} size={24} color="white" />
+                  <FeatureIcon title={feature.title} />
                 </Box>
                 <Heading
                   as="h3"
@@ -343,17 +386,17 @@ export default function Home() {
                   <Text
                     sx={{ fontSize: [1, 2], color: "#7F8C8D", display: "flex", alignItems: "center", gap: 2, mb: 1 }}
                   >
-                    <Icon glyph="calendar" size={16} />
+                    <Icon is="svg" glyph="calendar" size={16} />
                     {event.date}
                   </Text>
                   <Text
                     sx={{ fontSize: [1, 2], color: "#7F8C8D", display: "flex", alignItems: "center", gap: 2, mb: 1 }}
                   >
-                    <Icon glyph="clock" size={16} />
+                    <Icon is="svg" glyph="clock" size={16} />
                     {event.time}
                   </Text>
                   <Text sx={{ fontSize: [1, 2], color: "#7F8C8D", display: "flex", alignItems: "center", gap: 2 }}>
-                    <Icon glyph="location" size={16} />
+                    <Icon is="svg" glyph="location" size={16} />
                     {event.location}
                   </Text>
                 </Box>
@@ -380,7 +423,7 @@ export default function Home() {
                 }}
               >
                 View All Events
-                <Icon glyph="view-forward" size={18} />
+                <Icon is="svg" glyph="view-forward" size={18} />
               </Button>
             </Link>
           </Box>
@@ -438,7 +481,7 @@ export default function Home() {
                   fontWeight: 600,
                 }}
               >
-                <Icon glyph="slack" size={20} />
+                <Icon is="svg" glyph="slack" size={20} />
                 Join Our Slack
               </Button>
             </Link>
@@ -460,7 +503,7 @@ export default function Home() {
                   fontWeight: 600,
                 }}
               >
-                <Icon glyph="email" size={20} />
+                <Icon is="svg" glyph="email" size={20} />
                 Get in Touch
               </Button>
             </Link>
@@ -469,6 +512,6 @@ export default function Home() {
       </Box>
 
       <Footer />
-    </>
+    </Box>
   )
 }

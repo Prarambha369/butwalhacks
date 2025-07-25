@@ -153,34 +153,40 @@ const ToggleContainer = styled(Flex)`
 `
 
 function useHeaderState(unfixed) {
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false)
   const [toggled, setToggled] = useState(false)
   const [mobile, setMobile] = useState(false)
 
+  // Set mounted state after component mounts (client-side only)
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (!unfixed) {
-        const onScroll = () => setScrolled(window.scrollY >= 16)
-        window.addEventListener("scroll", onScroll)
-        return () => window.removeEventListener("scroll", onScroll)
-      }
-    }
-  }, [unfixed])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const mobileQuery = window.matchMedia("(max-width: 56em)")
-      const handleChange = () => {
-        setMobile(mobileQuery.matches)
-        if (!mobileQuery.matches) {
-          setToggled(false)
-        }
-      }
-      handleChange()
-      mobileQuery.addEventListener("change", handleChange)
-      return () => mobileQuery.removeEventListener("change", handleChange)
+    if (!mounted) return;
+    
+    if (!unfixed) {
+      const onScroll = () => setScrolled(window.scrollY >= 16)
+      window.addEventListener("scroll", onScroll)
+      return () => window.removeEventListener("scroll", onScroll)
     }
-  }, [])
+  }, [unfixed, mounted])
+
+  useEffect(() => {
+    if (!mounted) return;
+    
+    const mobileQuery = window.matchMedia("(max-width: 56em)")
+    const handleChange = () => {
+      setMobile(mobileQuery.matches)
+      if (!mobileQuery.matches) {
+        setToggled(false)
+      }
+    }
+    handleChange()
+    mobileQuery.addEventListener("change", handleChange)
+    return () => mobileQuery.removeEventListener("change", handleChange)
+  }, [mounted])
 
   return { scrolled, toggled, setToggled, mobile }
 }
