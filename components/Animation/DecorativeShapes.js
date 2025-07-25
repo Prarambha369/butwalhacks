@@ -140,22 +140,6 @@ export default function DecorativeShapes() {
                     zIndex: 0,
                 }}
             />
-
-            {/* Subtle gradient overlay */}
-            <Box
-                sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: (theme) =>
-                        `radial-gradient(circle at 30% 20%, ${theme.colors.primary}15 0%, transparent 50%), 
-             radial-gradient(circle at 70% 80%, ${theme.colors.secondary}10 0%, transparent 50%)`,
-                    zIndex: 0,
-                    pointerEvents: "none",
-                }}
-            />
         </>
     );
 }

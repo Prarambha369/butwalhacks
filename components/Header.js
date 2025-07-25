@@ -1,19 +1,19 @@
 "use client"
 
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import styled from "@emotion/styled"
-import {css, keyframes} from "@emotion/react"
-import {Box, Container, Flex} from "theme-ui"
+import { css, keyframes } from "@emotion/react"
+import { Box, Container, Flex } from "theme-ui"
 import theme from "../lib/theme"
 import Icon from "./icon"
 import Link from "next/link"
-import {Logo} from "./bin/Footer"
+import { Logo } from "./bin/Footer"
 
 const rgbaBgColor = (props, opacity) => `rgba(${props.bgColor[0]},${props.bgColor[1]},${props.bgColor[2]},${opacity})`
 
 const fixed = (props) =>
-    (props.scrolled || props.toggled || props.fixed) &&
-    css`
+  (props.scrolled || props.toggled || props.fixed) &&
+  css`
     background-color: ${rgbaBgColor(props, 0.98)};
     border-bottom: 1px solid rgba(48, 48, 48, 0.125);
     @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
@@ -24,7 +24,7 @@ const fixed = (props) =>
   `
 
 const Root = styled(Box, {
-    shouldForwardProp: (prop) => !["bgColor", "scrolled", "toggled"].includes(prop),
+  shouldForwardProp: (prop) => !["bgColor", "scrolled", "toggled"].includes(prop),
 })`
   position: fixed;
   top: 0;
@@ -48,23 +48,23 @@ export const Content = styled(Container)`
 `
 
 const hoverColor = (name) =>
-    ({
-        white: "smoke",
-        smoke: "muted",
-        muted: "slate",
-        slate: "black",
-        black: "slate",
-        primary: "error",
-    })[name] || "black"
+  ({
+    white: "smoke",
+    smoke: "muted",
+    muted: "slate",
+    slate: "black",
+    black: "slate",
+    primary: "error",
+  })[name] || "black"
 
 const slide = keyframes({
-    from: {transform: "translateY(-25%)", opacity: 0},
-    to: {transform: "translateY(0)", opacity: 1},
+  from: { transform: "translateY(-25%)", opacity: 0 },
+  to: { transform: "translateY(0)", opacity: 1 },
 })
 
 const layout = (props) =>
-    props.isMobile
-        ? css`
+  props.isMobile
+    ? css`
         display: ${props.toggled ? "flex" : "none"};
         flex-direction: column;
         overflow-y: auto;
@@ -96,7 +96,7 @@ const layout = (props) =>
           }
         }
       `
-        : css`
+    : css`
         @media (min-width: 56em) {
           display: flex;
           justify-content: flex-end;
@@ -112,7 +112,7 @@ const layout = (props) =>
       `
 
 const NavBar = styled(Box, {
-    shouldForwardProp: (prop) => !["isMobile", "toggled"].includes(prop),
+  shouldForwardProp: (prop) => !["isMobile", "toggled"].includes(prop),
 })`
   display: none;
   ${layout};
@@ -128,14 +128,14 @@ const NavBar = styled(Box, {
 `
 
 const Navigation = (props) => (
-    <NavBar role="navigation" {...props}>
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-        <Link href="/community">Community</Link>
-        <Link href="/workshops">Workshops</Link>
-        <Link href="/gallery">Gallery</Link>
-        <Link href="/contact">Contact</Link>
-    </NavBar>
+  <NavBar role="navigation" {...props}>
+    <Link href="/">Home</Link>
+    <Link href="/about">About</Link>
+    <Link href="/community">Community</Link>
+    <Link href="/workshops">Workshops</Link>
+    <Link href="/gallery">Gallery</Link>
+    <Link href="/contact">Contact</Link>
+  </NavBar>
 )
 
 const ToggleContainer = styled(Flex)`
@@ -153,98 +153,98 @@ const ToggleContainer = styled(Flex)`
 `
 
 function useHeaderState(unfixed) {
-    const [scrolled, setScrolled] = useState(false)
-    const [toggled, setToggled] = useState(false)
-    const [mobile, setMobile] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [toggled, setToggled] = useState(false)
+  const [mobile, setMobile] = useState(false)
 
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            if (!unfixed) {
-                const onScroll = () => setScrolled(window.scrollY >= 16)
-                window.addEventListener("scroll", onScroll)
-                return () => window.removeEventListener("scroll", onScroll)
-            }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!unfixed) {
+        const onScroll = () => setScrolled(window.scrollY >= 16)
+        window.addEventListener("scroll", onScroll)
+        return () => window.removeEventListener("scroll", onScroll)
+      }
+    }
+  }, [unfixed])
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const mobileQuery = window.matchMedia("(max-width: 56em)")
+      const handleChange = () => {
+        setMobile(mobileQuery.matches)
+        if (!mobileQuery.matches) {
+          setToggled(false)
         }
-    }, [unfixed])
+      }
+      handleChange()
+      mobileQuery.addEventListener("change", handleChange)
+      return () => mobileQuery.removeEventListener("change", handleChange)
+    }
+  }, [])
 
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const mobileQuery = window.matchMedia("(max-width: 56em)")
-            const handleChange = () => {
-                setMobile(mobileQuery.matches)
-                if (!mobileQuery.matches) {
-                    setToggled(false)
-                }
-            }
-            handleChange()
-            mobileQuery.addEventListener("change", handleChange)
-            return () => mobileQuery.removeEventListener("change", handleChange)
-        }
-    }, [])
-
-    return {scrolled, toggled, setToggled, mobile}
+  return { scrolled, toggled, setToggled, mobile }
 }
 
 function LogoLink() {
-    return (
-        <Link
-            href="/"
-            style={{
-                display: "flex",
-                alignItems: "center",
-                fontWeight: "bold",
-                fontSize: "1.1rem",
-                color: "#222",
-                textDecoration: "none",
-                transition: "color 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-                e.target.style.color = "#EC3750"
-            }}
-            onMouseLeave={(e) => {
-                e.target.style.color = "#222"
-            }}
-        >
-            <Logo style={{height: 28, marginRight: 10}}/>
-            Hack Club Butwal
-        </Link>
-    )
+  return (
+    <Link
+      href="/"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        fontWeight: "bold",
+        fontSize: "1.1rem",
+        color: "#222",
+        textDecoration: "none",
+        transition: "color 0.2s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.color = "#EC3750"
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.color = "#222"
+      }}
+    >
+      <Logo style={{ height: 28, marginRight: 10 }} />
+      Hack Club Butwal
+    </Link>
+  )
 }
 
-function NavigationWrapper({isMobile, toggled, mobile}) {
-    return <Navigation as="nav" aria-hidden={isMobile ? !toggled : false} isMobile={isMobile} toggled={toggled}/>
+function NavigationWrapper({ isMobile, toggled, mobile }) {
+  return <Navigation as="nav" aria-hidden={isMobile ? !toggled : false} isMobile={isMobile} toggled={toggled} />
 }
 
-function HeaderNavigation({mobile}) {
-    return <NavigationWrapper isMobile={false} mobile={mobile}/>
+function HeaderNavigation({ mobile }) {
+  return <NavigationWrapper isMobile={false} mobile={mobile} />
 }
 
-function HeaderToggle({onToggle, toggled}) {
-    return (
-        <ToggleContainer onClick={onToggle}>
-            <Icon glyph={toggled ? "view-close" : "menu"}/>
-        </ToggleContainer>
-    )
+function HeaderToggle({ onToggle, toggled }) {
+  return (
+    <ToggleContainer onClick={onToggle}>
+      <Icon glyph={toggled ? "view-close" : "menu"} />
+    </ToggleContainer>
+  )
 }
 
-function Header({unfixed, fixed, ...props}) {
-    const {scrolled, toggled, setToggled, mobile} = useHeaderState(unfixed)
-    const handleToggleMenu = () => setToggled((t) => !t)
+function Header({ unfixed, fixed, ...props }) {
+  const { scrolled, toggled, setToggled, mobile } = useHeaderState(unfixed)
+  const handleToggleMenu = () => setToggled((t) => !t)
 
-    return (
-        <Root {...props} fixed={fixed} scrolled={scrolled} toggled={toggled} bgColor={[255, 255, 255]} as="header">
-            <Content>
-                <LogoLink/>
-                <HeaderNavigation mobile={mobile}/>
-                <HeaderToggle onToggle={handleToggleMenu} toggled={toggled}/>
-            </Content>
-            <NavigationWrapper isMobile={true} toggled={toggled} mobile={mobile}/>
-        </Root>
-    )
+  return (
+    <Root {...props} fixed={fixed} scrolled={scrolled} toggled={toggled} bgColor={[255, 255, 255]} as="header">
+      <Content>
+        <LogoLink />
+        <HeaderNavigation mobile={mobile} />
+        <HeaderToggle onToggle={handleToggleMenu} toggled={toggled} />
+      </Content>
+      <NavigationWrapper isMobile={true} toggled={toggled} mobile={mobile} />
+    </Root>
+  )
 }
 
 Header.defaultProps = {
-    color: "black",
+  color: "black",
 }
 
 export default Header

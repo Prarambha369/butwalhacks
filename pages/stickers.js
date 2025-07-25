@@ -159,12 +159,12 @@ export default StickersPage
 
 export const getStaticProps = () => {
     const stickersDir = path.join(process.cwd(), 'public', 'stickers')
-
+    
     // Check if the stickers directory exists to avoid build errors
     if (!fs.existsSync(stickersDir)) {
         return {props: {stickers: []}}
     }
-
+    
     const stickers = fs
         .readdirSync(stickersDir)
         .filter(sticker => sticker !== 'hero.jpg')

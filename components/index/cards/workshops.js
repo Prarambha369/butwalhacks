@@ -67,7 +67,7 @@ const WorkshopCard = ({
  * @param {number} props.stars - The number of GitHub stars to display.
  * @returns {JSX.Element} The rendered Workshops section.
  */
-export default function Workshops({data, stars}) {
+export default function Workshops({ data, stars }) {
     return (
         <CardModel
             color="white"

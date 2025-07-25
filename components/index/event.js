@@ -1,89 +1,89 @@
-import {Box, Text, Grid, Flex, Avatar, Heading} from "theme-ui";
+import { Box, Text, Grid, Flex, Avatar, Heading } from "theme-ui";
 import tt from "tinytime";
 import Link from "next/link";
 
 const past = (dt) => new Date(dt) < new Date();
 const now = (start, end) =>
-    new Date() > new Date(start) && new Date() < new Date(end);
+  new Date() > new Date(start) && new Date() < new Date(end);
 
-const Event = ({slug, title, leader, avatar, start, end}) => (
-    <Link
-        href={`https://events.hackclub.com/${slug}`}
-        target="_blank"
-        rel="noopener"
-        style={{
-            position: "relative",
-            textDecoration: "none",
-            background: "var(--theme-ui-colors-elevated, #fff)",
-            color: "var(--theme-ui-colors-text, #000)",
-            padding: "1rem",
-            display: "block"
-        }}
+const Event = ({ slug, title, leader, avatar, start, end }) => (
+  <Link
+    href={`https://events.hackclub.com/${slug}`}
+    target="_blank"
+    rel="noopener"
+    style={{
+      position: "relative",
+      textDecoration: "none",
+      background: "var(--theme-ui-colors-elevated, #fff)",
+      color: "var(--theme-ui-colors-text, #000)",
+      padding: "1rem",
+      display: "block"
+    }}
+  >
+    <Box
+      sx={{
+        bg: past(end) ? "sunken" : "primary",
+        color: past(end) ? "text" : "white",
+        lineHeight: ["subheading", "body"],
+        m: -3,
+        py: 2,
+        px: 3,
+        mb: 3,
+        strong: { display: ["block", "inline"] },
+      }}
     >
-        <Box
-            sx={{
-                bg: past(end) ? "sunken" : "primary",
-                color: past(end) ? "text" : "white",
-                lineHeight: ["subheading", "body"],
-                m: -3,
-                py: 2,
-                px: 3,
-                mb: 3,
-                strong: {display: ["block", "inline"]},
-            }}
-        >
-            <Text>
-                <strong>{tt("{MM} {Do}").render(new Date(start))}</strong>{" "}
-                {tt("{h}:{mm}").render(new Date(start))}–
-                {tt("{h}:{mm} {a}").render(new Date(end))}
-            </Text>
-        </Box>
-        <Heading variant="subheadline" sx={{mt: 0, mb: 1}}>
-            {title}
-        </Heading>
-        <Flex
-            sx={{
-                alignItems: "center",
-                color: "muted",
-            }}
-        >
-            {now(start, end)}
-            {!avatar?.includes("emoji") && (
-                <Avatar
-                    src={avatar}
-                    alt={`${leader} profile picture`}
-                    size={24}
-                    sx={{height: 24, mr: 2}}
-                />
-            )}
-            <Text as="span">{leader}</Text>
-        </Flex>
-    </Link>
+      <Text>
+        <strong>{tt("{MM} {Do}").render(new Date(start))}</strong>{" "}
+        {tt("{h}:{mm}").render(new Date(start))}–
+        {tt("{h}:{mm} {a}").render(new Date(end))}
+      </Text>
+    </Box>
+    <Heading variant="subheadline" sx={{ mt: 0, mb: 1 }}>
+      {title}
+    </Heading>
+    <Flex
+      sx={{
+        alignItems: "center",
+        color: "muted",
+      }}
+    >
+      {now(start, end)}
+      {!avatar?.includes("emoji") && (
+        <Avatar
+          src={avatar}
+          alt={`${leader} profile picture`}
+          size={24}
+          sx={{ height: 24, mr: 2 }}
+        />
+      )}
+      <Text as="span">{leader}</Text>
+    </Flex>
+  </Link>
 );
 
-export default function Events({events}) {
-    return (
-        <Box mb={3}>
-            <Grid
-                mt={3}
-                mb={2}
-                columns={[2, 3]}
-                gap="1px"
-                sx={{
-                    bg: "sunken",
-                    borderRadius: "extra",
-                    overflow: "hidden",
-                    boxShadow: "elevated",
-                }}
-            >
-                {events
-                    .slice(0, 3)
-                    .map((event) =>
-                        !past(event.end) ? <Event {...event} key={event.id}/> : <></>,
-                    )}
-            </Grid>
-        </Box>
-    );
+export default function Events({ events }) {
+  return (
+    <Box mb={3}>
+      <Grid
+        mt={3}
+        mb={2}
+        columns={[2, 3]}
+        gap="1px"
+        sx={{
+          bg: "sunken",
+          borderRadius: "extra",
+          overflow: "hidden",
+          boxShadow: "elevated",
+        }}
+      >
+        {events
+          .slice(0, 3)
+          .map((event) =>
+            !past(event.end) ? <Event {...event} key={event.id} /> : <></>,
+          )}
+      </Grid>
+    </Box>
+  );
 }
 
 //hq file

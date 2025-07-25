@@ -12,7 +12,7 @@ import Tilt from "../../tilt";
  * @returns {JSX.Element} The rendered SprigConsole component.
  */
 
-export default function SprigConsole({stars, consoleCount}) {
+export default function SprigConsole({ stars, consoleCount }) {
     return (
         <Box sx={{position: "relative"}}>
             <CardModel

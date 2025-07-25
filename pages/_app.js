@@ -1,14 +1,14 @@
 import "@hackclub/theme/fonts/reg-bold.css";
 import Meta from "@hackclub/meta";
-import {ThemeProvider, useColorMode, Container} from "theme-ui";
+import { ThemeProvider, useColorMode, Container } from "theme-ui";
 import theme from "../lib/theme";
 import Script from "next/script";
 import Head from "next/head";
-import {SpeedInsights} from "@vercel/speed-insights/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import BinNav from "../components/bin/nav";
 import Footer from "../components/bin/Footer";
 import "../styles/global.css";
-import {Analytics} from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const App = ({Component, pageProps}) => (
     <ThemeProvider theme={theme}>
